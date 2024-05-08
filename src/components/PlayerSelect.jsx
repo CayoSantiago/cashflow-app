@@ -23,13 +23,7 @@ const PlayerSelect = () => {
       {selected ? (
         <Popover open={open} onOpenChange={setOpen} modal>
           <PopoverTrigger asChild>
-            <Button
-              variant="ghost"
-              role="combobox"
-              size='sm'
-              aria-expanded={open}
-              className="w-[180px] justify-start"
-            >
+            <Button variant="ghost" role="combobox" size='sm' aria-expanded={open} className="w-[180px] justify-start">
               <User className='w-4 h-4 mr-2' />
               {selected.name}
             </Button>
@@ -60,7 +54,7 @@ const PlayerSelect = () => {
                     <CommandGroup>
                       <CommandItem value='add player' onSelect={() => { setOpenCreateUser(true); setOpen(false) }}>
                         <UserPlus className='w-4 h-4 mr-2' />
-                        Add player
+                        Add Player
                       </CommandItem>
                     </CommandGroup>
                   </>

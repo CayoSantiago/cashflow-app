@@ -1,6 +1,6 @@
-import { DollarSign, Home, MoreHorizontal, PlusCircle, TrendingUp } from 'lucide-react'
+import { Coins, DollarSign, Home, MoreHorizontal, PlusCircle, TrendingUp } from 'lucide-react'
 import { Button } from './ui/button'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from './ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs'
 import { Card, CardContent } from './ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table'
@@ -14,6 +14,7 @@ import { doubleShares, halveShares } from '@/app/dataSlice'
 import { AnimatedCounter } from 'react-animated-counter'
 import SellRealEstateDialog from './SellRealEstateDialog'
 import AddCashFlowDialog from './AddCashFlowDialog'
+import GoldCoinsDialog from './GoldCoinsDialog'
 
 const PlayerAssetTabs = () => {
 
@@ -26,6 +27,7 @@ const PlayerAssetTabs = () => {
   const [openSellRealEstate, setOpenSellRealEstate] = useState(false)
 
   const [openAddCashFlow, setOpenAddCashFlow] = useState(false)
+  const [openGoldCoins, setOpenGoldCoins] = useState(false)
 
   const [selectedInv, setSelectedInv] = useState(null)
   const [selectedRealEstate, setSelectedRealEstate] = useState(null)
@@ -54,17 +56,23 @@ const PlayerAssetTabs = () => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => setOpenAddInvestment(true)}>
+              <DropdownMenuItem onSelect={() => setOpenAddInvestment(true)}>
                 <TrendingUp className='w-4 h-4 mr-2' />
                 Investment
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setOpenAddRealEstate(true)}>
+              <DropdownMenuItem onSelect={() => setOpenAddRealEstate(true)}>
                 <Home className='w-4 h-4 mr-2' />
                 Real Estate / Business
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setOpenAddCashFlow(true)}>
+              <DropdownMenuItem onSelect={() => setOpenAddCashFlow(true)}>
                 <DollarSign className='w-4 h-4 mr-2' />
                 Cash Flow
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onSelect={() => setOpenGoldCoins(true)}>
+                <Coins className='w-4 h-4 mr-2' />
+                Gold Coins
+                <span className='ml-auto'>{selected?.coins || 0}</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -236,6 +244,7 @@ const PlayerAssetTabs = () => {
       <SellRealEstateDialog open={openSellRealEstate} onOpenChange={isOpen => { if (!isOpen) setSelectedRealEstate(null); setOpenSellRealEstate(isOpen) }} {...selectedRealEstate} />
 
       <AddCashFlowDialog open={openAddCashFlow} onOpenChange={setOpenAddCashFlow} />
+      <GoldCoinsDialog open={openGoldCoins} onOpenChange={setOpenGoldCoins} />
     </Tabs>
   )
 }

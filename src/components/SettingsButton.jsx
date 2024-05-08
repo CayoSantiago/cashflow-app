@@ -1,8 +1,8 @@
-import { RotateCcw, Settings } from 'lucide-react'
+import { RotateCcw, Settings, UserMinus } from 'lucide-react'
 import { Button } from './ui/button'
 import { useDispatch } from 'react-redux'
 import { reset } from '@/app/dataSlice'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu'
 import { cn } from '@/lib/utils'
 
 const SettingsButton = ({ className }) => {
@@ -17,12 +17,16 @@ const SettingsButton = ({ className }) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end'>
-        <DropdownMenuGroup>
-          <DropdownMenuItem onSelect={() => dispatch(reset())}>
-            <RotateCcw className='w-4 h-4 mr-2' />
-            New game
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
+        <DropdownMenuLabel>Settings</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onSelect={() => dispatch(reset())}>
+          <RotateCcw className='w-4 h-4 mr-2' />
+          New Game
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <UserMinus className='w-4 h-4 mr-2' />
+          Remove Player
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )
