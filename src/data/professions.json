@@ -1,0 +1,242 @@
+[
+  {
+    "title": "Airline Pilot",
+    "salary": 9500,
+    "savings": 400,
+    "expenses": {
+      "taxes": 2350,
+      "home": 1330,
+      "school": 0,
+      "car": 300,
+      "creditCard": 710,
+      "other": 2210
+    },
+    "perChildExpense": 480,
+    "liabilities": {
+      "home": 143000,
+      "school": 0,
+      "car": 15000,
+      "creditCard": 23000
+    }
+  },
+  {
+    "title": "Business Manager",
+    "salary": 4600,
+    "savings": 400,
+    "expenses": {
+      "taxes": 910,
+      "home": 700,
+      "school": 60,
+      "car": 120,
+      "creditCard": 140,
+      "other": 1000
+    },
+    "perChildExpense": 240,
+    "liabilities": {
+      "home": 75000,
+      "school": 12000,
+      "car": 6000,
+      "creditCard": 4000
+    }
+  },
+  {
+    "title": "Doctor (MD)",
+    "salary": 13200,
+    "savings": 400,
+    "expenses": {
+      "taxes": 3420,
+      "home": 1900,
+      "school": 750,
+      "car": 380,
+      "creditCard": 320,
+      "other": 2880
+    },
+    "perChildExpense": 640,
+    "liabilities": {
+      "home": 202000,
+      "school": 150000,
+      "car": 19000,
+      "creditCard": 10000
+    }
+  },
+  {
+    "title": "Engineer",
+    "salary": 4900,
+    "savings": 400,
+    "expenses": {
+      "taxes": 1050,
+      "home": 700,
+      "school": 60,
+      "car": 140,
+      "creditCard": 170,
+      "other": 1090
+    },
+    "perChildExpense": 250,
+    "liabilities": {
+      "home": 75000,
+      "school": 12000,
+      "car": 7000,
+      "creditCard": 5000
+    }
+  },
+  {
+    "title": "Janitor",
+    "salary": 1600,
+    "savings": 560,
+    "expenses": {
+      "taxes": 280,
+      "home": 200,
+      "school": 0,
+      "car": 60,
+      "creditCard": 110,
+      "other": 300
+    },
+    "perChildExpense": 70,
+    "liabilities": {
+      "home": 20000,
+      "school": 0,
+      "car": 4000,
+      "creditCard": 3000
+    }
+  },
+  {
+    "title": "Lawyer",
+    "salary": 7500,
+    "savings": 400,
+    "expenses": {
+      "taxes": 1830,
+      "home": 1100,
+      "school": 390,
+      "car": 220,
+      "creditCard": 230,
+      "other": 1650
+    },
+    "perChildExpense": 380,
+    "liabilities": {
+      "home": 115000,
+      "school": 78000,
+      "car": 11000,
+      "creditCard": 7000
+    }
+  },
+  {
+    "title": "Mechanic",
+    "salary": 2000,
+    "savings": 670,
+    "expenses": {
+      "taxes": 360,
+      "home": 300,
+      "school": 0,
+      "car": 60,
+      "creditCard": 110,
+      "other": 450
+    },
+    "perChildExpense": 110,
+    "liabilities": {
+      "home": 31000,
+      "school": 0,
+      "car": 3000,
+      "creditCard": 3000
+    }
+  },
+  {
+    "title": "Nurse",
+    "salary": 3100,
+    "savings": 480,
+    "expenses": {
+      "taxes": 600,
+      "home": 400,
+      "school": 30,
+      "car": 100,
+      "creditCard": 140,
+      "other": 710
+    },
+    "perChildExpense": 170,
+    "liabilities": {
+      "home": 47000,
+      "school": 6000,
+      "car": 5000,
+      "creditCard": 4000
+    }
+  },
+  {
+    "title": "Police Officer",
+    "salary": 3000,
+    "savings": 520,
+    "expenses": {
+      "taxes": 580,
+      "home": 400,
+      "school": 0,
+      "car": 100,
+      "creditCard": 110,
+      "other": 690
+    },
+    "perChildExpense": 160,
+    "liabilities": {
+      "home": 46000,
+      "school": 0,
+      "car": 5000,
+      "creditCard": 3000
+    }
+  },
+  {
+    "title": "Secretary",
+    "salary": 2500,
+    "savings": 710,
+    "expenses": {
+      "taxes": 460,
+      "home": 400,
+      "school": 0,
+      "car": 80,
+      "creditCard": 110,
+      "other": 570
+    },
+    "perChildExpense": 140,
+    "liabilities": {
+      "home": 38000,
+      "school": 0,
+      "car": 4000,
+      "creditCard": 3000
+    }
+  },
+  {
+    "title": "Teacher (K-12)",
+    "salary": 3300,
+    "savings": 400,
+    "expenses": {
+      "taxes": 630,
+      "home": 500,
+      "school": 60,
+      "car": 100,
+      "creditCard": 140,
+      "other": 760
+    },
+    "perChildExpense": 180,
+    "liabilities": {
+      "home": 50000,
+      "school": 12000,
+      "car": 5000,
+      "creditCard": 4000
+    }
+  },
+  {
+    "title": "Truck Driver",
+    "salary": 2500,
+    "savings": 750,
+    "expenses": {
+      "taxes": 460,
+      "home": 400,
+      "school": 0,
+      "car": 80,
+      "creditCard": 110,
+      "other": 570
+    },
+    "perChildExpense": 140,
+    "liabilities": {
+      "home": 38000,
+      "school": 0,
+      "car": 4000,
+      "creditCard": 3000
+    }
+  }
+]
