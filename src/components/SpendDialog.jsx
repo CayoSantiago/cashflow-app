@@ -31,11 +31,12 @@ const SpendDialog = ({ open, onOpenChange }) => {
     if (mode === 'send' && amount > selected.balance) return
     dispatch(updateBalance(mode === 'send' ? amount * -1 : amount))
     form.reset()
+    setMode('send')
     onOpenChange(false)
   }
   
   return (
-    <Dialog open={open} onOpenChange={isOpen => { if (!isOpen) form.reset(); onOpenChange(isOpen) }}>
+    <Dialog open={open} onOpenChange={isOpen => { if (!isOpen) form.reset(); setMode('send'); onOpenChange(isOpen) }}>
       <DialogContent>
         <DialogHeader>
           <div className="flex items-center w-full justify-center sm:justify-start">
@@ -48,7 +49,7 @@ const SpendDialog = ({ open, onOpenChange }) => {
         </DialogHeader>
         <Separator />
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-center gap-4">
-          <Select defaultValue='send' onValueChange={setMode}>
+          <Select value={mode} onValueChange={setMode}>
             <SelectTrigger className='w-[100px] h-9 shadow-sm'>
               <SelectValue />
             </SelectTrigger>

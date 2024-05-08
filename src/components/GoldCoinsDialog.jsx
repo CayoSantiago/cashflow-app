@@ -28,10 +28,10 @@ const GoldCoinsDialog = ({ open, onOpenChange }) => {
 
   const onSubmit = (data, e) => {
     if (e.nativeEvent.submitter.value === 'buy') {
-      if (data.price > selected.balance) return
+      if (data.price > selected?.balance) return
       dispatch(buyGoldCoins(data))
     } else {
-      if (data.amount > selected.coins) return
+      if (data.amount > selected?.coins) return
       dispatch(sellGoldCoins(data))
     }
     form.reset()
@@ -47,7 +47,7 @@ const GoldCoinsDialog = ({ open, onOpenChange }) => {
             <DialogTitle>Gold Coins</DialogTitle>
           </div>
           <DialogDescription>
-            You currently have {selected.coins} coins.
+            You currently have {selected?.coins} coins.
           </DialogDescription>
         </DialogHeader>
         <Separator />
