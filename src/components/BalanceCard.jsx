@@ -1,7 +1,6 @@
 import { CreditCard, DollarSign, Undo } from 'lucide-react'
 import { Button } from './ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card'
-import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip'
 import { Separator } from './ui/separator'
 import usePlayerData from '@/hooks/usePlayerData'
 import { useDispatch } from 'react-redux'
@@ -9,6 +8,7 @@ import { undo, updateBalance } from '@/app/dataSlice'
 import { useState } from 'react'
 import SpendDialog from './SpendDialog'
 import { AnimatedCounter } from 'react-animated-counter'
+import Tooltip from './Tooltip'
 
 const BalanceCard = () => {
 
@@ -18,36 +18,31 @@ const BalanceCard = () => {
 
   const dispatch = useDispatch()
 
-  const cashFlow = selected ? selected.profession.salary + passiveIncome - totalExpenses : 0
+  const cashFlow = (selected?.salary || 0) + passiveIncome - totalExpenses
 
   return (
     <>
       <Card className="sm:col-span-2 relative">
         <div className="absolute top-2 right-2 flex gap-2">
-          <Tooltip delayDuration={0}>
-            <TooltipTrigger asChild>
-              <Button variant='ghost' disabled={!selected} onClick={() => dispatch(undo())} className='w-8 h-8 p-0 text-muted-foreground'>
-                <Undo className='w-4 h-4' />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side='top'>Undo</TooltipContent>
+
+          <Tooltip content='Undo'>
+            <Button variant='ghost' disabled={!selected} onClick={() => dispatch(undo())} className='w-8 h-8 p-0 text-muted-foreground'>
+              <Undo className='w-4 h-4' />
+            </Button>
           </Tooltip>
-          <Tooltip delayDuration={0}>
-            <TooltipTrigger asChild>
-              <Button variant='ghost' disabled={!selected} onClick={() => dispatch(updateBalance(cashFlow))} className='w-8 h-8 p-0 text-muted-foreground'>
-                <DollarSign className='w-4 h-4' />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side='top'>Pay Day</TooltipContent>
+
+          <Tooltip content='Pay Day'>
+            <Button variant='ghost' disabled={!selected} onClick={() => dispatch(updateBalance(cashFlow))} className='w-8 h-8 p-0 text-muted-foreground'>
+              <DollarSign className='w-4 h-4' />
+            </Button>
           </Tooltip>
-          <Tooltip delayDuration={0}>
-            <TooltipTrigger asChild>
-              <Button variant='ghost' disabled={!selected} onClick={() => setOpenSpendDialog(true)} className='w-8 h-8 p-0 text-muted-foreground'>
-                <CreditCard className='w-4 h-4' />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side='top'>Payment</TooltipContent>
+
+          <Tooltip content='Payment'>
+            <Button variant='ghost' disabled={!selected} onClick={() => setOpenSpendDialog(true)} className='w-8 h-8 p-0 text-muted-foreground'>
+              <CreditCard className='w-4 h-4' />
+            </Button>
           </Tooltip>
+
         </div>
         <CardHeader>
           <CardDescription>Balance</CardDescription>
@@ -68,7 +63,7 @@ const BalanceCard = () => {
             <div className="text-sm font-semibold flex items-center">
               $<span>
                 <AnimatedCounter
-                  value={selected?.profession?.salary || 0}
+                  value={selected?.salary || 0}
                   fontSize='14px'
                   includeDecimals={false}
                   includeCommas={true}
@@ -82,7 +77,7 @@ const BalanceCard = () => {
             <div className="text-sm font-semibold flex items-center">
               $<span>
                 <AnimatedCounter
-                  value={(selected?.profession?.salary || 0) + passiveIncome}
+                  value={(selected?.salary || 0) + passiveIncome}
                   fontSize='14px'
                   includeDecimals={false}
                   includeCommas={true}

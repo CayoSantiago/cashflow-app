@@ -19,7 +19,7 @@ const ChildrenCard = () => {
       <CardHeader className='px-3'>
         <div className="flex items-center justify-between px-3">
           <CardDescription>Children</CardDescription>
-          <Badge variant='outline' className='text-muted-foreground'>${selected?.profession?.perChildExpense || 0}</Badge>
+          <Badge variant='outline' className='text-muted-foreground'>${selected?.costPerChild || 0}</Badge>
         </div>
       </CardHeader>
       <CardContent>

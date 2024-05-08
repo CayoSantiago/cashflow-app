@@ -9,11 +9,11 @@ const ExpensesCard = () => {
   
   const { selected } = usePlayerData()
 
-  const profession = selected?.profession
   const children = selected?.children || 0
 
-  const generalExpenses = profession?.expenses ? Object.values(profession.expenses).reduce((acc, v) => acc + v, 0) : 0
-  const childExpenses = (profession?.perChildExpense || 0) * children
+  const libExpenses = selected?.liabilities?.reduce((acc, l) => acc + selected?.expenses?.[l.key] || 0, 0) || 0
+  const generalExpenses = libExpenses + (selected?.expenses?.taxes || 0) + (selected?.expenses?.other || 0)
+  const childExpenses = (selected?.costPerChild || 0) * children
 
   return (
     <Card className="overflow-hidden relative">
@@ -38,37 +38,22 @@ const ExpensesCard = () => {
               <span className="text-muted-foreground">
                 Taxes
               </span>
-              <span>${profession?.expenses?.taxes || 0}</span>
+              <span>${selected?.expenses?.taxes || 0}</span>
             </li>
-            <li className="flex items-center justify-between">
-              <span className="text-muted-foreground">
-                Home Mortgage Payment
-              </span>
-              <span>${profession?.expenses?.home || 0}</span>
-            </li>
-            <li className="flex items-center justify-between">
-              <span className="text-muted-foreground">
-                School Loan Payment
-              </span>
-              <span>${profession?.expenses?.school || 0}</span>
-            </li>
-            <li className="flex items-center justify-between">
-              <span className="text-muted-foreground">
-                Car Loan Payment
-              </span>
-              <span>${profession?.expenses?.car || 0}</span>
-            </li>
-            <li className="flex items-center justify-between">
-              <span className="text-muted-foreground">
-                Credit Card Payment
-              </span>
-              <span>${profession?.expenses?.creditCard || 0}</span>
-            </li>
+
+            {selected?.liabilities?.map(({ key, name }) => (
+              <li key={key} className="flex items-center justify-between">
+                <span className="text-muted-foreground">
+                  {name}
+                </span>
+                <span>${selected?.expenses?.[key] || 0}</span>
+              </li>
+            ))}
             <li className="flex items-center justify-between">
               <span className="text-muted-foreground">
                 Other Expenses
               </span>
-              <span>${profession?.expenses?.other || 0}</span>
+              <span>${selected?.expenses?.other || 0}</span>
             </li>
           </ul>
           <Separator className="my-2" />
@@ -80,7 +65,7 @@ const ExpensesCard = () => {
             </li>
             <li className="flex items-center justify-between">
               <span className="text-muted-foreground">Per Child Expense</span>
-              <span>${profession?.perChildExpense || 0}</span>
+              <span>${selected?.costPerChild || 0}</span>
             </li>
           </ul>
           <Separator className="my-2" />

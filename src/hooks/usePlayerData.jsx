@@ -10,7 +10,7 @@ const usePlayerData = () => {
 
   const passiveIncome = player.investments.reduce((acc, v) => acc + v.amount * v.cashFlow, 0) + player.realEstate.reduce((acc, v) => acc + v.cashFlow, 0)
 
-  const totalExpenses = Object.values(player.profession.expenses).reduce((acc, v) => acc + v, 0) + player.children * player.profession.perChildExpense
+  const totalExpenses = Object.values(player.expenses).reduce((acc, v) => acc + v, 0) + player.children * player.costPerChild
 
   return { players, selected: player, passiveIncome, totalExpenses }
 

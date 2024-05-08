@@ -1,4 +1,4 @@
-import { Coins, DollarSign, Home, MoreHorizontal, PlusCircle, TrendingUp } from 'lucide-react'
+import { Coins, DollarSign, Home, Landmark, MoreHorizontal, PlusCircle, TrendingUp } from 'lucide-react'
 import { Button } from './ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs'
@@ -15,6 +15,7 @@ import { AnimatedCounter } from 'react-animated-counter'
 import SellRealEstateDialog from './SellRealEstateDialog'
 import AddCashFlowDialog from './AddCashFlowDialog'
 import GoldCoinsDialog from './GoldCoinsDialog'
+import LiabilitiesCard from './LiabilitiesCard'
 
 const PlayerAssetTabs = () => {
 
@@ -36,8 +37,6 @@ const PlayerAssetTabs = () => {
 
   const invItems = selected?.investments?.map(i => ({ ...i, cashFlow: i.amount * i.cashFlow })) || []
   const incomeItems = invItems.concat(selected?.realEstate || []).concat(selected?.cashFlow || [])
-
-  const totalMortgage = selected ? selected.realEstate.reduce((acc, v) => acc + v.mortgage, 0) : 0
 
   return (
     <Tabs defaultValue="income">
@@ -74,6 +73,11 @@ const PlayerAssetTabs = () => {
                 Gold Coins
                 <span className='ml-auto'>{selected?.coins || 0}</span>
               </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <Landmark className='w-4 h-4 mr-2' />
+                Bank Loan
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -91,9 +95,15 @@ const PlayerAssetTabs = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
+                <TableRow>
+                  <TableCell className='py-6'>
+                    <div className="font-medium">Salary</div>
+                  </TableCell>
+                  <TableCell className="text-right">${selected?.salary || 0}</TableCell>
+                </TableRow>
                 {incomeItems.map(({ name, cashFlow }) => (
                   <TableRow key={name}>
-                    <TableCell>
+                    <TableCell className='py-6'>
                       <div className="font-medium">{name}</div>
                     </TableCell>
                     <TableCell className="text-right">${cashFlow}</TableCell>
@@ -141,7 +151,7 @@ const PlayerAssetTabs = () => {
                     <TableCell className='text-right'>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button aria-haspopup="true" size="icon" variant="ghost">
+                          <Button aria-haspopup="true" size="icon" variant="ghost" className='w-9 h-9'>
                             <MoreHorizontal className="h-4 w-4" />
                             <span className="sr-only">Toggle menu</span>
                           </Button>
@@ -207,34 +217,7 @@ const PlayerAssetTabs = () => {
 
       {/* ===== Liabilities ===== */}
       <TabsContent value="liabilities">
-        <Card>
-          <CardContent className='p-6'>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Real Estate / Business</TableHead>
-                  <TableHead className="text-right">Mortgage / Liability</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {selected?.realEstate?.map(({ name, mortgage }) => (
-                  <TableRow key={name}>
-                    <TableCell>
-                      <div className="font-medium">{name}</div>
-                    </TableCell>
-                    <TableCell className="text-right">${mortgage}</TableCell>
-                  </TableRow>
-                ))}
-                <TableRow>
-                  <TableCell>
-                    <div className="font-semibold">Total</div>
-                  </TableCell>
-                  <TableCell className="text-right font-semibold">${totalMortgage}</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
+        <LiabilitiesCard liabilities={selected?.liabilities} realEstate={selected?.realEstate} />
       </TabsContent>
 
       <AddInvestmentDialog open={openAddInvestment} onOpenChange={setOpenAddInvestment} />

@@ -28,7 +28,7 @@ const GoldCoinsDialog = ({ open, onOpenChange }) => {
 
   const onSubmit = (data, e) => {
     if (e.nativeEvent.submitter.value === 'buy') {
-      if (data.price > selected?.balance) return
+      if (data.price * data.amount > selected?.balance) return
       dispatch(buyGoldCoins(data))
     } else {
       if (data.amount > selected?.coins) return
@@ -58,7 +58,7 @@ const GoldCoinsDialog = ({ open, onOpenChange }) => {
               <Input id='amount' type='number' autoComplete='off' {...form.register('amount', { valueAsNumber: true })} className='shadow-sm h-9' />
             </div>
             <div className="space-y-1 5">
-              <Label htmlFor='price'>Price</Label>
+              <Label htmlFor='price'>Price / Coin</Label>
               <Input id='price' type='number' autoComplete='off' {...form.register('price', { valueAsNumber: true })} className='shadow-sm h-9' />
             </div>
           </div>

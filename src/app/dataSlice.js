@@ -11,15 +11,21 @@ export const dataSlice = createSlice({
   reducers: {
 
     addPlayer: (state, action) => {
+      const { name, profession } = action.payload
       state.players.push({
-        ...action.payload,
-        balance: action.payload.profession.savings,
+        name,
+        profession: profession.title,
+        salary: profession.salary,
+        balance: profession.savings,
+        expenses: profession.expenses,
+        liabilities: profession.liabilities,
+        costPerChild: profession.costPerChild,
         children: 0,
         coins: 0,
         investments: [],
         realEstate: [],
         cashFlow: [],
-        balanceHistory: []
+        balanceHistory: [],
       })
       state.selected = state.players.length - 1
     },
@@ -118,7 +124,7 @@ export const dataSlice = createSlice({
       const player = state.players[state.selected]
       const { amount, price } = action.payload
       if (price > player.balance) return
-      player.balance -= price
+      player.balance -= price * amount
       player.coins += amount
     },
 
@@ -126,8 +132,16 @@ export const dataSlice = createSlice({
       const player = state.players[state.selected]
       const { amount, price } = action.payload
       if (player.coins < amount) return
+      player.balance += price * amount
       player.coins -= amount
-      player.balance += price
+    },
+
+    payOffLiability: (state, action) => {
+      const player = state.players[state.selected]
+      const lib = player.liabilities.find(l => l.key === action.payload)
+      if (player.balance < lib.value) return
+      player.balance -= lib.value
+      player.liabilities = player.liabilities.filter(l => l.key !== action.payload)
     }
 
   }
@@ -151,6 +165,7 @@ export const {
   reset,
   buyGoldCoins,
   sellGoldCoins,
+  payOffLiability,
 } = dataSlice.actions
 
 export default dataSlice.reducer
