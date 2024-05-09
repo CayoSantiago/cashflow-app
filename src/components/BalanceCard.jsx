@@ -1,22 +1,28 @@
-import { CreditCard, DollarSign, Undo } from 'lucide-react'
+import { CreditCard, DollarSign, Landmark } from 'lucide-react'
 import { Button } from './ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card'
 import { Separator } from './ui/separator'
 import usePlayerData from '@/hooks/usePlayerData'
 import { useDispatch } from 'react-redux'
-import { undo, updateBalance } from '@/app/dataSlice'
-import { useState } from 'react'
-import SpendDialog from './SpendDialog'
+import { updateBalance } from '@/app/dataSlice'
+import { useEffect, useState } from 'react'
+import BalanceDialog from './BalanceDialog'
 import { AnimatedCounter } from 'react-animated-counter'
 import Tooltip from './Tooltip'
+import LoanDialog from './LoanDialog'
+import BankruptcyDialog from './BankruptcyDialog'
 
 const BalanceCard = () => {
 
   const { selected, passiveIncome, totalExpenses } = usePlayerData()
 
   const [openSpendDialog, setOpenSpendDialog] = useState(false)
+  const [openLoanDialog, setOpenLoanDialog] = useState(false)
+  const [openBankruptcy, setOpenBankruptcy] = useState(false)
 
   const dispatch = useDispatch()
+
+  useEffect(() => { if (selected?.isBankrupt) setOpenBankruptcy(true) }, [selected?.isBankrupt])
 
   const cashFlow = (selected?.salary || 0) + passiveIncome - totalExpenses
 
@@ -25,19 +31,19 @@ const BalanceCard = () => {
       <Card className="sm:col-span-2 relative">
         <div className="absolute top-2 right-2 flex gap-2">
 
-          <Tooltip content='Undo'>
-            <Button variant='ghost' disabled={!selected} onClick={() => dispatch(undo())} className='w-8 h-8 p-0 text-muted-foreground'>
-              <Undo className='w-4 h-4' />
+          <Tooltip content='Loan'>
+            <Button variant='ghost' disabled={!selected} onClick={() => setOpenLoanDialog(true)} className='w-8 h-8 p-0 text-muted-foreground'>
+              <Landmark className='w-4 h-4' />
             </Button>
           </Tooltip>
 
           <Tooltip content='Pay Day'>
-            <Button variant='ghost' disabled={!selected} onClick={() => dispatch(updateBalance(cashFlow))} className='w-8 h-8 p-0 text-muted-foreground'>
+            <Button variant='ghost' disabled={!selected} onClick={() => dispatch(updateBalance({ payDay: true, amount: cashFlow }))} className='w-8 h-8 p-0 text-muted-foreground'>
               <DollarSign className='w-4 h-4' />
             </Button>
           </Tooltip>
 
-          <Tooltip content='Payment'>
+          <Tooltip content='Update Balance'>
             <Button variant='ghost' disabled={!selected} onClick={() => setOpenSpendDialog(true)} className='w-8 h-8 p-0 text-muted-foreground'>
               <CreditCard className='w-4 h-4' />
             </Button>
@@ -103,7 +109,9 @@ const BalanceCard = () => {
         </CardContent>
       </Card>
 
-      <SpendDialog open={openSpendDialog} onOpenChange={setOpenSpendDialog} />
+      <BalanceDialog open={openSpendDialog} onOpenChange={setOpenSpendDialog} />
+      <LoanDialog open={openLoanDialog} onOpenChange={setOpenLoanDialog} />
+      <BankruptcyDialog open={openBankruptcy} onOpenChange={setOpenBankruptcy} />
     </>
   )
 }

@@ -3,9 +3,13 @@ import { Button } from './ui/button'
 import { Card, CardContent } from './ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table'
 import { payOffLiability } from '@/app/dataSlice'
+import { useState } from 'react'
+import PayOffLoanDialog from './PayOffLoanDialog'
 
-const LiabilitiesCard = ({ liabilities, realEstate }) => {
+const LiabilitiesCard = ({ liabilities, loan, realEstate }) => {
   
+  const [openLoanDialog, setOpenLoanDialog] = useState(false)
+
   const dispatch = useDispatch()
 
   const totalMortgage = realEstate?.reduce((acc, v) => acc + v.mortgage, 0) || 0
@@ -28,6 +32,17 @@ const LiabilitiesCard = ({ liabilities, realEstate }) => {
                     </TableCell>
                   </TableRow>
                 ))}
+                {loan ? (
+                  <TableRow>
+                    <TableCell>Bank Loan</TableCell>
+                    <TableCell className="text-right">${loan.toLocaleString()}</TableCell>
+                    <TableCell className='text-right'>
+                      <Button variant='ghost' size='sm' onClick={() => setOpenLoanDialog(true)}>
+                        Pay off
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ) : null}
               </TableBody>
             </Table>
           </CardContent>
@@ -62,6 +77,8 @@ const LiabilitiesCard = ({ liabilities, realEstate }) => {
           </Table>
         </CardContent>
       </Card>
+
+      <PayOffLoanDialog open={openLoanDialog} onOpenChange={setOpenLoanDialog} />
     </>
   )
 }

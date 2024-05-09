@@ -12,7 +12,7 @@ const ExpensesCard = () => {
   const children = selected?.children || 0
 
   const libExpenses = selected?.liabilities?.reduce((acc, l) => acc + selected?.expenses?.[l.key] || 0, 0) || 0
-  const generalExpenses = libExpenses + (selected?.expenses?.taxes || 0) + (selected?.expenses?.other || 0)
+  const generalExpenses = libExpenses + (selected?.expenses?.taxes || 0) + (selected?.expenses?.other || 0) + (selected?.loan || 0) / 10
   const childExpenses = (selected?.costPerChild || 0) * children
 
   return (
@@ -55,6 +55,14 @@ const ExpensesCard = () => {
               </span>
               <span>${selected?.expenses?.other || 0}</span>
             </li>
+            {selected?.loan ? (
+              <li className="flex items-center justify-between">
+                <span className="text-muted-foreground">
+                  Loan Payment
+                </span>
+                <span>${(selected?.loan || 0) / 10}</span>
+              </li>
+            ) : null}
           </ul>
           <Separator className="my-2" />
           <ul className="grid gap-3">

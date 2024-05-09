@@ -1,34 +1,25 @@
-import { Coins, DollarSign, Home, Landmark, MoreHorizontal, PlusCircle, TrendingUp } from 'lucide-react'
+import { MoreHorizontal } from 'lucide-react'
 import { Button } from './ui/button'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from './ui/dropdown-menu'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs'
 import { Card, CardContent } from './ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table'
 import usePlayerData from '@/hooks/usePlayerData'
-import AddInvestmentDialog from './AddInvestmentDialog'
 import { useState } from 'react'
-import AddRealEstateDialog from './AddRealEstateDialog'
 import SellInvestmentDialog from './SellInvestmentDialog'
 import { useDispatch } from 'react-redux'
 import { doubleShares, halveShares } from '@/app/dataSlice'
 import { AnimatedCounter } from 'react-animated-counter'
 import SellRealEstateDialog from './SellRealEstateDialog'
-import AddCashFlowDialog from './AddCashFlowDialog'
-import GoldCoinsDialog from './GoldCoinsDialog'
 import LiabilitiesCard from './LiabilitiesCard'
+import AddAssetButton from './AddAssetButton'
 
 const PlayerAssetTabs = () => {
 
   const { selected } = usePlayerData()
 
-  const [openAddInvestment, setOpenAddInvestment] = useState(false)
   const [openSellInvestment, setOpenSellInvestment] = useState(false)
-
-  const [openAddRealEstate, setOpenAddRealEstate] = useState(false)
   const [openSellRealEstate, setOpenSellRealEstate] = useState(false)
-
-  const [openAddCashFlow, setOpenAddCashFlow] = useState(false)
-  const [openGoldCoins, setOpenGoldCoins] = useState(false)
 
   const [selectedInv, setSelectedInv] = useState(null)
   const [selectedRealEstate, setSelectedRealEstate] = useState(null)
@@ -47,39 +38,7 @@ const PlayerAssetTabs = () => {
           <TabsTrigger disabled={!selected} value="liabilities">Liabilities</TabsTrigger>
         </TabsList>
         <div className="ml-auto flex items-center gap-2">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" disabled={!selected} className="h-7 gap-2 text-sm">
-                <PlusCircle className="h-3.5 w-3.5" />
-                <span className="sr-only sm:not-sr-only">Add</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onSelect={() => setOpenAddInvestment(true)}>
-                <TrendingUp className='w-4 h-4 mr-2' />
-                Investment
-              </DropdownMenuItem>
-              <DropdownMenuItem onSelect={() => setOpenAddRealEstate(true)}>
-                <Home className='w-4 h-4 mr-2' />
-                Real Estate / Business
-              </DropdownMenuItem>
-              <DropdownMenuItem onSelect={() => setOpenAddCashFlow(true)}>
-                <DollarSign className='w-4 h-4 mr-2' />
-                Cash Flow
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onSelect={() => setOpenGoldCoins(true)}>
-                <Coins className='w-4 h-4 mr-2' />
-                Gold Coins
-                <span className='ml-auto'>{selected?.coins || 0}</span>
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <Landmark className='w-4 h-4 mr-2' />
-                Bank Loan
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <AddAssetButton />
         </div>
       </div>
 
@@ -217,17 +176,11 @@ const PlayerAssetTabs = () => {
 
       {/* ===== Liabilities ===== */}
       <TabsContent value="liabilities">
-        <LiabilitiesCard liabilities={selected?.liabilities} realEstate={selected?.realEstate} />
+        <LiabilitiesCard loan={selected?.loan} liabilities={selected?.liabilities} realEstate={selected?.realEstate} />
       </TabsContent>
 
-      <AddInvestmentDialog open={openAddInvestment} onOpenChange={setOpenAddInvestment} />
       <SellInvestmentDialog open={openSellInvestment} onOpenChange={isOpen => { if (!isOpen) setSelectedInv(null); setOpenSellInvestment(isOpen) }} {...selectedInv} />
-      
-      <AddRealEstateDialog open={openAddRealEstate} onOpenChange={setOpenAddRealEstate} />
       <SellRealEstateDialog open={openSellRealEstate} onOpenChange={isOpen => { if (!isOpen) setSelectedRealEstate(null); setOpenSellRealEstate(isOpen) }} {...selectedRealEstate} />
-
-      <AddCashFlowDialog open={openAddCashFlow} onOpenChange={setOpenAddCashFlow} />
-      <GoldCoinsDialog open={openGoldCoins} onOpenChange={setOpenGoldCoins} />
     </Tabs>
   )
 }

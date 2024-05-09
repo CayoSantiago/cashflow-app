@@ -1,18 +1,31 @@
+import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 
 const usePlayerData = () => {
   
   const { players, selected } = useSelector(state => state.data)
 
-  if (selected < 0 || selected >= players.length) return { players, selected: null, passiveIncome: 0, totalExpenses: 0 }
-
   const player = players[selected]
 
-  const passiveIncome = player.investments.reduce((acc, v) => acc + v.amount * v.cashFlow, 0) + player.realEstate.reduce((acc, v) => acc + v.cashFlow, 0)
+  const invIncome = useMemo(() => player?.investments?.reduce((acc, v) => acc + v.amount * v.cashFlow, 0) || 0, [player?.investments])
+  const reIncome = useMemo(() => player?.realEstate?.reduce((acc, v) => acc + v.cashFlow, 0) || 0, [player?.realEstate])
 
-  const totalExpenses = Object.values(player.expenses).reduce((acc, v) => acc + v, 0) + player.children * player.costPerChild
+  const libExpenses = useMemo(() => (
+    player?.liabilities?.reduce((acc, l) => acc + player?.expenses?.[l.key] || 0, 0) || 0
+  ), [player?.liabilities, player?.expenses])
 
-  return { players, selected: player, passiveIncome, totalExpenses }
+  const totalExpenses = libExpenses
+    + (player?.expenses?.taxes || 0)
+    + (player?.expenses?.other || 0)
+    + (player?.loan || 0) / 10
+    + (player?.children || 0) * (player?.costPerChild || 0)
+
+  return {
+    players,
+    selected: player,
+    passiveIncome: invIncome + reIncome,
+    totalExpenses
+  }
 
 }
 

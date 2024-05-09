@@ -10,6 +10,11 @@ export const dataSlice = createSlice({
   initialState,
   reducers: {
 
+    reset: (state) => {
+      state.selected = -1
+      state.players = []
+    },
+
     addPlayer: (state, action) => {
       const { name, profession } = action.payload
       state.players.push({
@@ -20,12 +25,13 @@ export const dataSlice = createSlice({
         expenses: profession.expenses,
         liabilities: profession.liabilities,
         costPerChild: profession.costPerChild,
+        loan: 0,
         children: 0,
         coins: 0,
         investments: [],
         realEstate: [],
         cashFlow: [],
-        balanceHistory: [],
+        isBankrupt: false,
       })
       state.selected = state.players.length - 1
     },
@@ -87,7 +93,7 @@ export const dataSlice = createSlice({
       const player = state.players[state.selected]
       const realEstate = player.realEstate.find(i => i.name === action.payload.name)
       if (!realEstate) return
-      player.balance += action.payload.price
+      player.balance += action.payload.price - realEstate.mortgage
       player.realEstate = player.realEstate.filter(i => i.name !== action.payload.name)
     },
 
@@ -104,20 +110,14 @@ export const dataSlice = createSlice({
 
     updateBalance: (state, action) => {
       const player = state.players[state.selected]
-      player.balance += action.payload
-      player.balanceHistory.push(action.payload)
-    },
+      const { payDay = false, amount } = action.payload
+      player.balance += amount
 
-    undo: (state) => {
-      const player = state.players[state.selected]
-      if (player.balanceHistory.length <= 0) return
-      const prev = player.balanceHistory.pop()
-      player.balance -= prev
-    },
-
-    reset: (state) => {
-      state.selected = -1
-      state.players = []
+      if (player.isBankrupt && player.balance >= 0) {
+        player.isBankrupt = false
+      } else if (payDay && !player.isBankrupt && player.balance < 0) {
+        player.isBankrupt = true
+      }
     },
 
     buyGoldCoins: (state, action) => {
@@ -142,12 +142,27 @@ export const dataSlice = createSlice({
       if (player.balance < lib.value) return
       player.balance -= lib.value
       player.liabilities = player.liabilities.filter(l => l.key !== action.payload)
-    }
+    },
+
+    getBankLoan: (state, action) => {
+      const player = state.players[state.selected]
+      const amount = action.payload
+      player.balance += amount
+      player.loan = amount
+    },
+
+    payOffBankLoan: (state, action) => {
+      const player = state.players[state.selected]
+      const amount = Math.min(action.payload, player.loan)
+      player.balance -= amount
+      player.loan -= amount
+    },
 
   }
 })
 
 export const {
+  reset,
   addPlayer,
   selectPlayer,
   incrementChildren,
@@ -161,11 +176,11 @@ export const {
   addCashFlow,
   updateCashFlow,
   updateBalance,
-  undo,
-  reset,
   buyGoldCoins,
   sellGoldCoins,
   payOffLiability,
+  getBankLoan,
+  payOffBankLoan,
 } = dataSlice.actions
 
 export default dataSlice.reducer
