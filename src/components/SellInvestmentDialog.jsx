@@ -35,7 +35,7 @@ const SellInvestmentDialog = ({ open, onOpenChange, name = '', amount = 0 }) => 
             <DialogTitle>Sell Investment</DialogTitle>
           </div>
           <DialogDescription>
-            Sell {amount} shares of {name}.
+            Sell {amount} share(s) of {name}.
           </DialogDescription>
         </DialogHeader>
         <Separator />

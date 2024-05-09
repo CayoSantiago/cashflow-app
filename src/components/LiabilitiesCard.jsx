@@ -16,8 +16,37 @@ const LiabilitiesCard = ({ liabilities, loan, realEstate }) => {
   
   return (
     <>
+      <Card>
+        <CardContent className='p-6'>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Real Estate / Business</TableHead>
+                <TableHead className="text-right">Mortgage / Liability</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {realEstate?.map(({ name, mortgage }) => (
+                <TableRow key={name}>
+                  <TableCell>
+                    <div className="font-medium">{name}</div>
+                  </TableCell>
+                  <TableCell className="text-right">${mortgage.toLocaleString()}</TableCell>
+                </TableRow>
+              ))}
+              <TableRow>
+                <TableCell>
+                  <div className="font-semibold">Total</div>
+                </TableCell>
+                <TableCell className="text-right font-semibold">${totalMortgage.toLocaleString()}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+
       {liabilities?.length ? (
-        <Card className='mb-2'>
+        <Card className='mt-2'>
           <CardContent className='p-6'>
             <Table>
               <TableBody>
@@ -48,35 +77,6 @@ const LiabilitiesCard = ({ liabilities, loan, realEstate }) => {
           </CardContent>
         </Card>
       ) : null}
-
-      <Card>
-        <CardContent className='p-6'>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Real Estate / Business</TableHead>
-                <TableHead className="text-right">Mortgage / Liability</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {realEstate?.map(({ name, mortgage }) => (
-                <TableRow key={name}>
-                  <TableCell>
-                    <div className="font-medium">{name}</div>
-                  </TableCell>
-                  <TableCell className="text-right">${mortgage.toLocaleString()}</TableCell>
-                </TableRow>
-              ))}
-              <TableRow>
-                <TableCell>
-                  <div className="font-semibold">Total</div>
-                </TableCell>
-                <TableCell className="text-right font-semibold">${totalMortgage.toLocaleString()}</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
 
       <PayOffLoanDialog open={openLoanDialog} onOpenChange={setOpenLoanDialog} />
     </>

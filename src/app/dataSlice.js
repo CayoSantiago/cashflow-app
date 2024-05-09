@@ -30,7 +30,6 @@ export const dataSlice = createSlice({
         coins: 0,
         investments: [],
         realEstate: [],
-        cashFlow: [],
         isBankrupt: false,
       })
       state.selected = state.players.length - 1
@@ -101,11 +100,18 @@ export const dataSlice = createSlice({
       state.players[state.selected].cashFlow.push(action.payload)
     },
 
-    updateCashFlow: (state, action) => {
+    editInvestmentCashFlow: (state, action) => {
       const player = state.players[state.selected]
-      const cf = player.cashFlow.find(i => i.name === action.payload.name)
-      if (!cf) return
-      cf.cashFlow = action.payload.cashFlow
+      const { name, cashFlow } = action.payload
+      const inv = player.investments.find(i => i.name === name)
+      if (inv) inv.cashFlow = cashFlow
+    },
+
+    editRealEstateCashFlow: (state, action) => {
+      const player = state.players[state.selected]
+      const { name, cashFlow } = action.payload
+      const realEstate = player.realEstate.find(i => i.name === name)
+      if (realEstate) realEstate.cashFlow = cashFlow
     },
 
     updateBalance: (state, action) => {
@@ -174,7 +180,8 @@ export const {
   addRealEstate,
   sellRealEstate,
   addCashFlow,
-  updateCashFlow,
+  editInvestmentCashFlow,
+  editRealEstateCashFlow,
   updateBalance,
   buyGoldCoins,
   sellGoldCoins,
