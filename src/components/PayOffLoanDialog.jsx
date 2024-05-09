@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useDispatch } from 'react-redux'
 import { payOffBankLoan } from '@/app/dataSlice'
-import { Landmark, Plus } from 'lucide-react'
+import { Landmark } from 'lucide-react'
 import { Separator } from './ui/separator'
 
 const schema = z.object({

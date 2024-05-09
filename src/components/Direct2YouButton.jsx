@@ -1,4 +1,4 @@
-import { Users } from 'lucide-react'
+import { LogIn, Users } from 'lucide-react'
 import { Button } from './ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuSeparator, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from './ui/dropdown-menu'
 import usePlayerData from '@/hooks/usePlayerData'
@@ -24,12 +24,16 @@ const Direct2YouButton = () => {
           {selected?.d2y ? (
             <>
               <DropdownMenuLabel className='flex items-center'>
-                Cash Flow: <span className='ml-auto'>${selected?.d2yCashFlow || 0}</span>
+                {selected?.d2yCashFlow ? (
+                  <>Cash Flow: <span className='ml-auto'>${selected?.d2yCashFlow || 0}</span></>
+                ) : (
+                  <>Level 1</>
+                )}
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuSub>
                 <DropdownMenuSubTrigger>
-                  Increase cash flow
+                  Increase Cash Flow
                 </DropdownMenuSubTrigger>
                 <DropdownMenuPortal>
                   <DropdownMenuSubContent>
@@ -42,6 +46,7 @@ const Direct2YouButton = () => {
           ) : (
             <DropdownMenuSub>
               <DropdownMenuSubTrigger>
+                <LogIn className='w-4 h-4 mr-2' />
                 Join
               </DropdownMenuSubTrigger>
               <DropdownMenuPortal>
