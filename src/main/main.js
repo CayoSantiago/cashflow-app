@@ -4,10 +4,13 @@ import * as path from 'path';
 let mainWindow;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({});
+  mainWindow = new BrowserWindow({ show: false });
+  mainWindow.maximize()
+  mainWindow.show()
 
   // Vite dev server URL
-  mainWindow.loadURL('http://localhost:5173');
+  // mainWindow.loadURL('http://localhost:5173');
+  mainWindow.loadURL(`file://${path.join(__dirname, '../renderer/index.html')}`);
   mainWindow.on('closed', () => mainWindow = null);
 }
 
