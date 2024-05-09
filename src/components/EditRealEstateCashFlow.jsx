@@ -4,10 +4,10 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Input } from './ui/input'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Coins, DollarSign } from 'lucide-react'
+import { DollarSign } from 'lucide-react'
 import { Separator } from './ui/separator'
 import { useDispatch } from 'react-redux'
-import { editRealEstateCashFlow, sellRealEstate } from '@/app/dataSlice'
+import { editRealEstateCashFlow } from '@/app/dataSlice'
 
 const schema = z.object({
   cashFlow: z.number()

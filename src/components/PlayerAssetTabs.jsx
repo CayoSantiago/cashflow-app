@@ -1,9 +1,4 @@
-import { MoreHorizontal } from 'lucide-react'
-import { Button } from './ui/button'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from './ui/dropdown-menu'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs'
-import { Card, CardContent } from './ui/card'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table'
 import usePlayerData from '@/hooks/usePlayerData'
 import { useState } from 'react'
 import SellInvestmentDialog from './SellInvestmentDialog'
@@ -27,7 +22,6 @@ const PlayerAssetTabs = () => {
     <Tabs defaultValue="assets">
       <div className="flex items-center">
         <TabsList>
-          {/* <TabsTrigger disabled={!selected} value="income">Income</TabsTrigger> */}
           <TabsTrigger disabled={!selected} value="assets">Assets</TabsTrigger>
           <TabsTrigger disabled={!selected} value="liabilities">Liabilities</TabsTrigger>
         </TabsList>
@@ -36,7 +30,6 @@ const PlayerAssetTabs = () => {
         </div>
       </div>
 
-      {/* ===== Assets ===== */}
       <TabsContent value='assets'>
         <div className="space-y-2">
           <InvestmentsCard investments={selected?.investments} />
@@ -44,7 +37,6 @@ const PlayerAssetTabs = () => {
         </div>
       </TabsContent>
 
-      {/* ===== Liabilities ===== */}
       <TabsContent value="liabilities">
         <LiabilitiesCard loan={selected?.loan} liabilities={selected?.liabilities} realEstate={selected?.realEstate} />
       </TabsContent>
