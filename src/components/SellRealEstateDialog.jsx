@@ -42,7 +42,7 @@ const SellRealEstateDialog = ({ open, onOpenChange, name = '' }) => {
         <Separator />
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-center gap-4">
           <Input type='number' placeholder='Price' autoComplete='off' {...form.register('price', { valueAsNumber: true })} className='h-9 shadow-sm w-auto flex-grow' />
-          <Button type='submit' className='h-9'>Sell</Button>
+          <Button type='submit' variant='destructive' className='h-9'>Sell</Button>
         </form>
       </DialogContent>
     </Dialog>

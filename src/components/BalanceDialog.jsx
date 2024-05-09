@@ -45,9 +45,9 @@ const BalanceDialog = ({ open, onOpenChange }) => {
           </DialogDescription>
         </DialogHeader>
         <Separator />
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-center gap-2">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-center">
           <Input type='number' placeholder='Amount' autoComplete='off' {...form.register('amount', { valueAsNumber: true })} className='h-9 shadow-sm w-auto flex-grow' />
-          <Button type='submit' value={-1} variant='destructive' className='h-9 w-9 p-0'>
+          <Button type='submit' value={-1} variant='destructive' className='h-9 w-9 p-0 ml-4 mr-2'>
             <Minus className='w-4 h-4' />
           </Button>
           <Button type='submit' value={1} className='h-9 w-9 p-0'>

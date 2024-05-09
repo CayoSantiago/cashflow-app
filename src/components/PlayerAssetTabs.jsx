@@ -7,6 +7,7 @@ import LiabilitiesCard from './LiabilitiesCard'
 import AddAssetButton from './AddAssetButton'
 import InvestmentsCard from './InvestmentsCard'
 import RealEstateCard from './RealEstateCard'
+import Direct2YouButton from './Direct2YouButton'
 
 const PlayerAssetTabs = () => {
 
@@ -26,6 +27,7 @@ const PlayerAssetTabs = () => {
           <TabsTrigger disabled={!selected} value="liabilities">Liabilities</TabsTrigger>
         </TabsList>
         <div className="ml-auto flex items-center gap-2">
+          <Direct2YouButton />
           <AddAssetButton />
         </div>
       </div>

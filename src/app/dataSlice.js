@@ -31,6 +31,8 @@ export const dataSlice = createSlice({
         investments: [],
         realEstate: [],
         isBankrupt: false,
+        d2y: false,
+        d2yCashFlow: 0,
       })
       state.selected = state.players.length - 1
     },
@@ -164,6 +166,18 @@ export const dataSlice = createSlice({
       player.loan -= amount
     },
 
+    joinD2Y: (state, action) => {
+      const player = state.players[state.selected]
+      if (action.payload > player.balance) return
+      player.balance -= action.payload
+      player.d2y = true
+    },
+
+    increaseD2YCashFlow: (state, action) => {
+      const player = state.players[state.selected]
+      player.d2yCashFlow += action.payload
+    },
+
   }
 })
 
@@ -188,6 +202,8 @@ export const {
   payOffLiability,
   getBankLoan,
   payOffBankLoan,
+  joinD2Y,
+  increaseD2YCashFlow,
 } = dataSlice.actions
 
 export default dataSlice.reducer

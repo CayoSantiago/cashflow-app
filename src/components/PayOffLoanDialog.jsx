@@ -42,8 +42,8 @@ const PayOffLoanDialog = ({ open, onOpenChange }) => {
         <Separator />
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-center gap-2">
           <Input type='number' placeholder='Amount' autoComplete='off' {...form.register('amount', { valueAsNumber: true })} className='h-9 shadow-sm w-auto flex-grow' />
-          <Button type='submit' className='h-9 w-9 p-0'>
-            <Plus className='w-4 h-4' />
+          <Button type='submit' size='sm'>
+            Confirm
           </Button>
         </form>
       </DialogContent>
