@@ -1,5 +1,5 @@
 import { Button } from './ui/button'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from './ui/dialog'
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from './ui/dialog'
 import { Input } from './ui/input'
 import { useDispatch } from 'react-redux'
 import { Coins } from 'lucide-react'
@@ -16,7 +16,7 @@ const schema = z.object({
   price: z.number(),
 })
 
-const GoldCoinsDialog = ({ open, onOpenChange }) => {
+const GoldCoinsDialog = ({ open, onOpenChange, mode = 'Buy' }) => {
 
   const { selected } = usePlayerData()
 
@@ -44,7 +44,7 @@ const GoldCoinsDialog = ({ open, onOpenChange }) => {
         <DialogHeader>
           <div className="flex items-center w-full justify-center sm:justify-start">
             <Coins className='w-5 h-5 mr-2 inline' />
-            <DialogTitle>Gold Coins</DialogTitle>
+            <DialogTitle>{mode} Gold Coins</DialogTitle>
           </div>
           <DialogDescription>
             You currently have {selected?.coins} coins.
@@ -63,8 +63,14 @@ const GoldCoinsDialog = ({ open, onOpenChange }) => {
             </div>
           </div>
           <DialogFooter>
-            <Button className='h-9' variant='destructive' type='submit' value='sell'>Sell</Button>
-            <Button className='h-9' type='submit' value='buy'>Buy</Button>
+            <DialogClose asChild>
+              <Button type='button' variant='outline' className='h-9'>Cancel</Button>
+            </DialogClose>
+            {mode === 'Buy' ? (
+              <Button className='h-9' type='submit' value='buy'>Buy</Button>
+            ) : mode === 'Sell' ? (
+              <Button className='h-9' variant='destructive' type='submit' value='sell'>Sell</Button>
+            ) : null}
           </DialogFooter>
         </form>
       </DialogContent>

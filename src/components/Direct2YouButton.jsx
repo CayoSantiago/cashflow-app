@@ -23,12 +23,15 @@ const Direct2YouButton = () => {
         <DropdownMenuContent align="end">
           {selected?.d2y ? (
             <>
-              <DropdownMenuLabel className='flex items-center'>
-                {selected?.d2yCashFlow ? (
-                  <>Cash Flow: <span className='ml-auto'>${selected?.d2yCashFlow || 0}</span></>
-                ) : (
-                  <>Level 1</>
-                )}
+              <DropdownMenuLabel className='grid'>
+                Direct 2 You
+                <span className='font-normal text-xs text-muted-foreground flex items-center'>
+                  {selected?.d2yCashFlow ? (
+                    <>Cash Flow: <span className='ml-auto'>${selected?.d2yCashFlow || 0}</span></>
+                  ) : (
+                    <>Level 1</>
+                  )}
+                </span>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuSub>
@@ -44,19 +47,25 @@ const Direct2YouButton = () => {
               </DropdownMenuSub>
             </>
           ) : (
-            <DropdownMenuSub>
-              <DropdownMenuSubTrigger>
-                <LogIn className='w-4 h-4 mr-2' />
-                Join
-              </DropdownMenuSubTrigger>
-              <DropdownMenuPortal>
-                <DropdownMenuSubContent>
-                  <DropdownMenuItem onSelect={() => dispatch(joinD2Y(200))}>$200</DropdownMenuItem>
-                  <DropdownMenuItem onSelect={() => dispatch(joinD2Y(300))}>$300</DropdownMenuItem>
-                  <DropdownMenuItem onSelect={() => dispatch(joinD2Y(400))}>$400</DropdownMenuItem>
-                </DropdownMenuSubContent>
-              </DropdownMenuPortal>
-            </DropdownMenuSub>
+            <>
+              <DropdownMenuLabel>
+                Direct 2 You
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuSub>
+                <DropdownMenuSubTrigger>
+                  <LogIn className='w-4 h-4 mr-2' />
+                  Join
+                </DropdownMenuSubTrigger>
+                <DropdownMenuPortal>
+                  <DropdownMenuSubContent>
+                    <DropdownMenuItem onSelect={() => dispatch(joinD2Y(200))}>$200</DropdownMenuItem>
+                    <DropdownMenuItem onSelect={() => dispatch(joinD2Y(300))}>$300</DropdownMenuItem>
+                    <DropdownMenuItem onSelect={() => dispatch(joinD2Y(400))}>$400</DropdownMenuItem>
+                  </DropdownMenuSubContent>
+                </DropdownMenuPortal>
+              </DropdownMenuSub>
+            </>
           )}
         </DropdownMenuContent>
       </DropdownMenu>

@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Input } from './ui/input'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { DollarSign } from 'lucide-react'
+import { Home } from 'lucide-react'
 import { Separator } from './ui/separator'
 import { useDispatch } from 'react-redux'
 import { editRealEstateCashFlow } from '@/app/dataSlice'
@@ -32,7 +32,7 @@ const EditRealEstateCashFlow = ({ open, onOpenChange, name = '' }) => {
       <DialogContent>
         <DialogHeader>
           <div className="flex items-center w-full justify-center sm:justify-start">
-            <DollarSign className='w-5 h-5 mr-2 inline' />
+            <Home className='w-5 h-5 mr-2 inline' />
             <DialogTitle>Edit Cash Flow</DialogTitle>
           </div>
           <DialogDescription>

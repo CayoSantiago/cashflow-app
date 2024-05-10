@@ -64,7 +64,7 @@ const PlayerSelect = () => {
           </PopoverContent>
         </Popover>
       ) : (
-        <Button variant='outline' onClick={() => setOpenCreateUser(true)} className='w-[180px]'>Start Game</Button>
+        <Button size='sm' onClick={() => setOpenCreateUser(true)} className='w-[180px]'>Start Game</Button>
       )}
 
       <CreatePlayerDialog open={openCreateUser} onOpenChange={setOpenCreateUser} />

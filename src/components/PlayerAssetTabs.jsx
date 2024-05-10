@@ -8,6 +8,8 @@ import AddAssetButton from './AddAssetButton'
 import InvestmentsCard from './InvestmentsCard'
 import RealEstateCard from './RealEstateCard'
 import Direct2YouButton from './Direct2YouButton'
+import GoldCoinButton from './GoldCoinButton'
+import IncomeCard from './IncomrCard'
 
 const PlayerAssetTabs = () => {
 
@@ -23,14 +25,20 @@ const PlayerAssetTabs = () => {
     <Tabs defaultValue="assets">
       <div className="flex items-center">
         <TabsList>
+          <TabsTrigger disabled={!selected} value='income'>Income</TabsTrigger>
           <TabsTrigger disabled={!selected} value="assets">Assets</TabsTrigger>
           <TabsTrigger disabled={!selected} value="liabilities">Liabilities</TabsTrigger>
         </TabsList>
         <div className="ml-auto flex items-center gap-2">
           <Direct2YouButton />
+          <GoldCoinButton />
           <AddAssetButton />
         </div>
       </div>
+
+      <TabsContent value='income'>
+        <IncomeCard salary={selected?.salary} investments={selected?.investments} realEstate={selected?.realEstate} d2yCashFlow={selected?.d2yCashFlow} />
+      </TabsContent>
 
       <TabsContent value='assets'>
         <div className="space-y-2">

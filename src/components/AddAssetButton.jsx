@@ -1,11 +1,10 @@
-import { Coins, Home, PlusCircle, TrendingUp } from 'lucide-react'
+import { Home, PlusCircle, TrendingUp } from 'lucide-react'
 import { Button } from './ui/button'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu'
 import usePlayerData from '@/hooks/usePlayerData'
 import { useState } from 'react'
 import AddInvestmentDialog from './AddInvestmentDialog'
 import AddRealEstateDialog from './AddRealEstateDialog'
-import GoldCoinsDialog from './GoldCoinsDialog'
 
 const AddAssetButton = () => {
 
@@ -13,7 +12,6 @@ const AddAssetButton = () => {
 
   const [openAddInvestment, setOpenAddInvestment] = useState(false)
   const [openAddRealEstate, setOpenAddRealEstate] = useState(false)
-  const [openGoldCoins, setOpenGoldCoins] = useState(false)
 
   return (
     <>
@@ -33,18 +31,11 @@ const AddAssetButton = () => {
             <Home className='w-4 h-4 mr-2' />
             Real Estate / Business
           </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onSelect={() => setOpenGoldCoins(true)}>
-            <Coins className='w-4 h-4 mr-2' />
-            Gold Coins
-            <span className='ml-auto'>{selected?.coins || 0}</span>
-          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
 
       <AddInvestmentDialog open={openAddInvestment} onOpenChange={setOpenAddInvestment} />
       <AddRealEstateDialog open={openAddRealEstate} onOpenChange={setOpenAddRealEstate} />
-      <GoldCoinsDialog open={openGoldCoins} onOpenChange={setOpenGoldCoins} />
     </>
   )
 }
