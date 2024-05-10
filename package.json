@@ -7,7 +7,7 @@
     "dev": "electron-vite dev -w",
     "build": "electron-vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "NODE_ENV=production electron-vite preview"
+    "preview": "electron-vite preview"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
