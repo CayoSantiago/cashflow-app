@@ -13,9 +13,8 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "make-windows": "electron-builder --ia32 --x64 -w",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder -mwl"
+    "dist": "electron-builder -wml"
   },
   "postinstall": "electron-builder install-app-deps",
   "build": {
