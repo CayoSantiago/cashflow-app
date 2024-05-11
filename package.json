@@ -8,13 +8,17 @@
   "scripts": {
     "dev": "electron-vite dev -w --outDir=dist",
     "build": "electron-vite build --outDir=dist",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "electron-vite preview --outDir=dist",
+    
     "start": "electron-forge start",
+    
     "package": "electron-forge package",
     "make": "electron-forge make",
+    
     "pack": "electron-builder --dir",
-    "dist": "electron-builder -wml"
+    "dist": "electron-builder",
+
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
   },
   "postinstall": "electron-builder install-app-deps",
   "build": {
