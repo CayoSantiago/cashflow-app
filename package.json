@@ -2,12 +2,41 @@
   "name": "cashflow-app",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "author": "Brandon Crisp",
+  "description": "App to be used along side the Cash Flow board game",
+  "main": "./dist/main/main.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "electron-vite dev -w --outDir=dist",
+    "build": "electron-vite build --outDir=dist",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "electron-vite preview --outDir=dist",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "make-windows": "electron-builder --ia32 --x64 -w",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder -mwl"
+  },
+  "postinstall": "electron-builder install-app-deps",
+  "build": {
+    "appId": "crispy.code.com",
+    "mac": {
+      "category": "public.app-category.games"
+    },
+    "win": {
+      "target": "portable"
+    },
+    "linux": {
+      "target": "AppImage"
+    },
+    "extraMetadata": {
+      "main": "dist/main/main.js"
+    },
+    "files": [
+      "dist/**/*",
+      "package.json"
+    ],
+    "extends": null
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -27,6 +56,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
+    "electron-squirrel-startup": "^1.0.0",
     "lucide-react": "^0.378.0",
     "react": "^18.2.0",
     "react-animated-counter": "^1.7.8",
@@ -38,11 +68,23 @@
     "zod": "^3.23.6"
   },
   "devDependencies": {
+    "@electron-forge/cli": "^7.4.0",
+    "@electron-forge/maker-deb": "^7.4.0",
+    "@electron-forge/maker-rpm": "^7.4.0",
+    "@electron-forge/maker-squirrel": "^7.4.0",
+    "@electron-forge/maker-zip": "^7.4.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
+    "@electron-forge/plugin-fuses": "^7.4.0",
+    "@electron/fuses": "^1.8.0",
     "@types/node": "^20.12.8",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.19",
+    "electron": "^30.0.3",
+    "electron-builder": "^24.13.3",
+    "electron-packager": "^17.1.2",
+    "electron-vite": "^2.2.0",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
