@@ -23,7 +23,7 @@ const usePlayerData = () => {
   return {
     players,
     selected: player,
-    passiveIncome: invIncome + reIncome + player?.d2yCashFlow || 0,
+    passiveIncome: invIncome + reIncome + player?.d2y?.cashFlow || 0,
     totalExpenses
   }
 

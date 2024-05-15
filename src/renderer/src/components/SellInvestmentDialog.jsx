@@ -13,7 +13,7 @@ const schema = z.object({
   price: z.number()
 })
 
-const SellInvestmentDialog = ({ open, onOpenChange, name = '', amount = 0 }) => {
+const SellInvestmentDialog = ({ open, onOpenChange, name = '', amount = 0, idx }) => {
 
   const form = useForm({
     resolver: zodResolver(schema)
@@ -22,7 +22,7 @@ const SellInvestmentDialog = ({ open, onOpenChange, name = '', amount = 0 }) => 
   const dispatch = useDispatch()
 
   const onSubmit = ({ price }) => {
-    dispatch(sellInvestment({ name, price }))
+    dispatch(sellInvestment({ idx, price }))
     onOpenChange(false)
   }
   

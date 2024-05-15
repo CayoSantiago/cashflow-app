@@ -8,7 +8,7 @@ import SellRealEstateDialog from './SellRealEstateDialog';
 import EditRealEstateCashFlow from './EditRealEstateCashFlow';
 import { AnimatedCounter } from 'react-animated-counter';
 
-const RealEstateCard = ({ realEstate }) => {
+const RealEstateCard = ({ name, realEstate }) => {
   
   const [openSellRealEstate, setOpenSellRealEstate] = useState(false)
   const [openEditCashFlow, setOpenEditCashFlow] = useState(false)
@@ -31,18 +31,18 @@ const RealEstateCard = ({ realEstate }) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {realEstate?.map(({ name, downPayment, cost, cashFlow }) => (
-              <TableRow key={name}>
+            {realEstate?.map((r, idx) => (
+              <TableRow key={`${name}-${r.name}-${idx}`}>
                 <TableCell>
-                  <div className="font-medium">{name}</div>
+                  <div className="font-medium">{r.name}</div>
                 </TableCell>
-                <TableCell className="hidden sm:table-cell">${downPayment}</TableCell>
-                <TableCell className="hidden sm:table-cell text-right">${cost}</TableCell>
+                <TableCell className="hidden sm:table-cell">${r.downPayment}</TableCell>
+                <TableCell className="hidden sm:table-cell text-right">${r.cost}</TableCell>
                 <TableCell>
                   <div className="flex items-center justify-end">
                     $<span>
                       <AnimatedCounter
-                        value={cashFlow}
+                        value={r.cashFlow}
                         fontSize='14px'
                         includeDecimals={false}
                         />
@@ -58,8 +58,8 @@ const RealEstateCard = ({ realEstate }) => {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem onSelect={() => { setSelectedRealEstate({ name }); setOpenEditCashFlow(true) }}>Edit cash flow</DropdownMenuItem>
-                      <DropdownMenuItem onSelect={() => { setSelectedRealEstate({ name }); setOpenSellRealEstate(true) }}>Sell</DropdownMenuItem>
+                      <DropdownMenuItem onSelect={() => { setSelectedRealEstate({ name: r.name, idx }); setOpenEditCashFlow(true) }}>Edit cash flow</DropdownMenuItem>
+                      <DropdownMenuItem onSelect={() => { setSelectedRealEstate({ name: r.name, idx }); setOpenSellRealEstate(true) }}>Sell</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </TableCell>

@@ -34,12 +34,12 @@ const PlayerSelect = () => {
               <CommandList>
                 <CommandEmpty>No player found.</CommandEmpty>
                 <CommandGroup>
-                  {players?.map((p) => (
+                  {players?.map((p, idx) => (
                     <CommandItem
                       key={p.name}
                       value={p.name}
                       onSelect={() => {
-                        dispatch(selectPlayer(p.name))
+                        dispatch(selectPlayer(idx))
                         setOpen(false)
                       }}
                     >

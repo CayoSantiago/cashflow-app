@@ -13,7 +13,7 @@ const schema = z.object({
   cashFlow: z.number()
 })
 
-const EditRealEstateCashFlow = ({ open, onOpenChange, name = '' }) => {
+const EditRealEstateCashFlow = ({ open, onOpenChange, name = '', idx }) => {
 
   const form = useForm({
     resolver: zodResolver(schema)
@@ -22,7 +22,7 @@ const EditRealEstateCashFlow = ({ open, onOpenChange, name = '' }) => {
   const dispatch = useDispatch()
 
   const onSubmit = ({ cashFlow }) => {
-    dispatch(editRealEstateCashFlow({ name, cashFlow }))
+    dispatch(editRealEstateCashFlow({ idx, cashFlow }))
     form.reset()
     onOpenChange(false)
   }

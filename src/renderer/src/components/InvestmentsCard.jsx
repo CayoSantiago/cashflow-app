@@ -10,7 +10,7 @@ import { useState } from 'react';
 import SellInvestmentDialog from './SellInvestmentDialog';
 import EditInvestmentCashFlow from './EditInvestmentCashFlow';
 
-const AssetInvestmentsCard = ({ investments }) => {
+const InvestmentsCard = ({ name, investments }) => {
 
   const [openSellInv, setOpenSellInv] = useState(false)
   const [openEditCashFlow, setOpenEditCashFlow] = useState(false)
@@ -33,10 +33,10 @@ const AssetInvestmentsCard = ({ investments }) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {investments?.map(({ name, amount, cost, cashFlow }) => (
-              <TableRow key={name}>
+            {investments?.map(({ amount, cost, cashFlow, ...i }, idx) => (
+              <TableRow key={`${name}-${i.name}-${idx}`}>
                 <TableCell>
-                  <div className="font-medium">{name}</div>
+                  <div className="font-medium">{i.name}</div>
                 </TableCell>
                 <TableCell className="hidden sm:table-cell text-right">${cost}</TableCell>
                 <TableCell className="hidden sm:table-cell">
@@ -52,7 +52,7 @@ const AssetInvestmentsCard = ({ investments }) => {
                   <div className="flex items-center justify-end">
                     $<span>
                       <AnimatedCounter
-                        value={cashFlow * amount}
+                        value={cashFlow}
                         fontSize='14px'
                         includeDecimals={false}
                         />
@@ -68,10 +68,10 @@ const AssetInvestmentsCard = ({ investments }) => {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem onSelect={() => dispatch(doubleShares({ name }))}>Double shares</DropdownMenuItem>
-                      <DropdownMenuItem disabled={amount < 2} onSelect={() => dispatch(halveShares({ name }))}>Halve shares</DropdownMenuItem>
-                      <DropdownMenuItem onSelect={() => { setSelectedInv({ name, amount }); setOpenEditCashFlow(true) }}>Edit cash flow</DropdownMenuItem>
-                      <DropdownMenuItem onSelect={() => { setSelectedInv({ name, amount }); setOpenSellInv(true) }}>Sell</DropdownMenuItem>
+                      <DropdownMenuItem onSelect={() => dispatch(doubleShares({ idx }))}>Double shares</DropdownMenuItem>
+                      <DropdownMenuItem disabled={amount < 2} onSelect={() => dispatch(halveShares({ idx }))}>Halve shares</DropdownMenuItem>
+                      <DropdownMenuItem onSelect={() => { setSelectedInv({ idx, name: i.name, amount }); setOpenEditCashFlow(true) }}>Edit cash flow</DropdownMenuItem>
+                      <DropdownMenuItem onSelect={() => { setSelectedInv({ idx, name: i.name, amount }); setOpenSellInv(true) }}>Sell</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </TableCell>
@@ -87,4 +87,4 @@ const AssetInvestmentsCard = ({ investments }) => {
   )
 }
 
-export default AssetInvestmentsCard
+export default InvestmentsCard

@@ -21,13 +21,13 @@ const Direct2YouButton = () => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          {selected?.d2y ? (
+          {selected?.d2y?.hasJoined ? (
             <>
               <DropdownMenuLabel className='grid'>
                 Direct 2 You
                 <span className='font-normal text-xs text-muted-foreground flex items-center'>
-                  {selected?.d2yCashFlow ? (
-                    <>Cash Flow: <span className='ml-auto'>${selected?.d2yCashFlow || 0}</span></>
+                  {selected?.d2y?.cashFlow ? (
+                    <>Cash Flow: <span className='ml-auto'>${selected?.d2y?.cashFlow || 0}</span></>
                   ) : (
                     <>Level 1</>
                   )}

@@ -6,7 +6,7 @@ import { payOffLiability } from '@/app/dataSlice'
 import { useState } from 'react'
 import PayOffLoanDialog from './PayOffLoanDialog'
 
-const LiabilitiesCard = ({ liabilities, loan, realEstate }) => {
+const LiabilitiesCard = ({ name, liabilities, loan, realEstate }) => {
   
   const [openLoanDialog, setOpenLoanDialog] = useState(false)
 
@@ -17,16 +17,16 @@ const LiabilitiesCard = ({ liabilities, loan, realEstate }) => {
   return (
     <>
       {liabilities?.length ? (
-        <Card className='mb-2'>
+        <Card>
           <CardContent className='p-6'>
             <Table>
               <TableBody>
-                {liabilities?.map(({ key, name, value }) => (
-                  <TableRow key={key}>
-                    <TableCell>{name}</TableCell>
-                    <TableCell className="text-right">${value.toLocaleString()}</TableCell>
+                {liabilities?.map((l, idx) => (
+                  <TableRow key={`${name}-${l.key}-${idx}`}>
+                    <TableCell>{l.name}</TableCell>
+                    <TableCell className="text-right">${l.value.toLocaleString()}</TableCell>
                     <TableCell className='text-right'>
-                      <Button variant='ghost' size='sm' onClick={() => dispatch(payOffLiability(key))}>
+                      <Button variant='ghost' size='sm' onClick={() => dispatch(payOffLiability(idx))}>
                         Pay off
                       </Button>
                     </TableCell>
@@ -59,12 +59,12 @@ const LiabilitiesCard = ({ liabilities, loan, realEstate }) => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {realEstate?.map(({ name, mortgage }) => (
-                <TableRow key={name}>
+              {realEstate?.map((re, idx) => (
+                <TableRow key={`${name}-${re.name}-${idx}`}>
                   <TableCell>
-                    <div className="font-medium">{name}</div>
+                    <div className="font-medium">{re.name}</div>
                   </TableCell>
-                  <TableCell className="text-right">${mortgage.toLocaleString()}</TableCell>
+                  <TableCell className="text-right">${re.mortgage.toLocaleString()}</TableCell>
                 </TableRow>
               ))}
               <TableRow>

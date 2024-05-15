@@ -37,18 +37,20 @@ const PlayerAssetTabs = () => {
       </div>
 
       <TabsContent value='income'>
-        <IncomeCard salary={selected?.salary} investments={selected?.investments} realEstate={selected?.realEstate} d2yCashFlow={selected?.d2yCashFlow} />
+        <IncomeCard {...selected} />
       </TabsContent>
 
       <TabsContent value='assets'>
         <div className="space-y-2">
-          <InvestmentsCard investments={selected?.investments} />
-          <RealEstateCard realEstate={selected?.realEstate} />
+          <InvestmentsCard {...selected} />
+          <RealEstateCard {...selected} />
         </div>
       </TabsContent>
 
       <TabsContent value="liabilities">
-        <LiabilitiesCard loan={selected?.loan} liabilities={selected?.liabilities} realEstate={selected?.realEstate} />
+        <div className="space-y-2">
+          <LiabilitiesCard {...selected} />
+        </div>
       </TabsContent>
 
       <SellInvestmentDialog open={openSellInvestment} onOpenChange={isOpen => { if (!isOpen) setSelectedInv(null); setOpenSellInvestment(isOpen) }} {...selectedInv} />
