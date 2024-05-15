@@ -48,7 +48,7 @@ const PlayerSelect = () => {
                     </CommandItem>
                   ))}
                 </CommandGroup>
-                {players.length < 4 ? (
+                {players.length < 6 ? (
                   <>
                     <CommandSeparator />
                     <CommandGroup>

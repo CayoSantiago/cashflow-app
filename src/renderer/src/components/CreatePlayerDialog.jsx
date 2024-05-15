@@ -55,12 +55,7 @@ const CreatePlayerDialog = ({ open, onOpenChange }) => {
             <Label htmlFor="profession">Profession</Label>
             <Popover open={profOpen} onOpenChange={setProfOpen} modal>
               <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  role="combobox"
-                  aria-expanded={open}
-                  className="w-full h-9 shadow-sm justify-between font-normal"
-                >
+                <Button variant="outline" role="combobox" aria-expanded={open} className="w-full h-9 shadow-sm justify-between font-normal">
                   {profession ? profession.title : "Select profession..."}
                   <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
@@ -72,14 +67,7 @@ const CreatePlayerDialog = ({ open, onOpenChange }) => {
                     <CommandEmpty>No framework found.</CommandEmpty>
                     <CommandGroup>
                       {professions.map((p) => (
-                        <CommandItem
-                          key={p.title}
-                          value={p.title}
-                          onSelect={() => {
-                            setProfession(p)
-                            setProfOpen(false)
-                          }}
-                        >
+                        <CommandItem key={p.title} value={p.title} onSelect={() => { setProfession(p); setProfOpen(false) }}>
                           <Check className={cn("mr-2 h-4 w-4", profession?.title === p.title ? "opacity-100" : "opacity-0")} />
                           {p.title}
                         </CommandItem>
