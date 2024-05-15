@@ -11,6 +11,10 @@ cd cashflow-app
 ```
 
 ```
+npm install
+```
+
+```
 npm run build
 ```
 
