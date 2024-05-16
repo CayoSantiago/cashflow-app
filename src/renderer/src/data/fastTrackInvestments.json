@@ -1,0 +1,105 @@
+[
+  {
+    "title": "Grocery Delivery Company",
+    "sub": "2 Locations",
+    "cost": 225000,
+    "cashFlow": 7000
+  },
+  {
+    "title": "Online Conferencing Company IPO",
+    "desc": "Buy 500,000 shares at 10c/share. Roll a 5 or 6 on one die, shares go to $1/share - get $500,000 cash from the bank. Roll less than 5, get $0.",
+    "cost": 50000,
+    "cashFlow": 0,
+    "potentialCash": 500000
+  },
+  {
+    "title": "Quick Food Marts",
+    "sub": "3 Stores",
+    "cost": 120000,
+    "cashFlow": 5000
+  },
+  {
+    "title": "60 Unit Apartment Building",
+    "cost": 300000,
+    "cashFlow": 8000
+  },
+  {
+    "title": "Family Restaurant Chain",
+    "cost": 300000,
+    "cashFlow": 14000
+  },
+  {
+    "title": "Truck Parts Maker",
+    "cost": 150000,
+    "cashFlow": 5000
+  },
+  {
+    "title": "Buy A Gold Mine",
+    "cost": 150000,
+    "cashFlow": 25000,
+    "cashFlowSec": 0
+  },
+  {
+    "title": "Coffee Company Franchise",
+    "sub": "2 Outlets",
+    "cost": 300000,
+    "cashFlow": 10000
+  },
+  {
+    "title": "Beauty Salons",
+    "sub": "3 Shops",
+    "cost": 250000,
+    "cashFlow": 10000
+  },
+  {
+    "title": "Russian Oil Deal",
+    "cost": 300000,
+    "cashFlow": 75000,
+    "cashFlowSec": 0
+  },
+  {
+    "title": "T-Shirt Stores",
+    "sub": "5 Outlets",
+    "cost": 200000,
+    "cashFlow": 8000
+  },
+  {
+    "title": "Heat And A/C Service",
+    "cost": 200000,
+    "cashFlow": 10000
+  },
+  {
+    "title": "Cookware Infomercial",
+    "cost": 225000,
+    "cashFlow": 50000,
+    "cashFlowSec": 0
+  },
+  {
+    "title": "200 Unit Mini Storage",
+    "cost": 200000,
+    "cashFlow": 6000
+  },
+  {
+    "title": "Burger Franchise",
+    "cost": 300000,
+    "cashFlow": 9500
+  },
+  {
+    "title": "Software Co. IPO",
+    "desc": "Buy 250,000 shares at 10c/share. If you roll a 6 on one die, shares go to $2/share - get $500,000 cash from the bank. Roll less than 6, get $0.",
+    "cost": 25000,
+    "cashFlow": 0,
+    "potentialCash": 500000
+  },
+  {
+    "title": "Dry Cleaners",
+    "sub": "2 Stores",
+    "cost": 100000,
+    "cashFlow": 3000
+  },
+  {
+    "title": "Auto Repair Shop",
+    "cost": 150000,
+    "cashFlow": 6000
+  }
+]

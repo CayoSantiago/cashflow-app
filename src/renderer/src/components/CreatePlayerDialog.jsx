@@ -62,7 +62,7 @@ const CreatePlayerDialog = ({ open, onOpenChange }) => {
               </PopoverTrigger>
               <PopoverContent className="p-0">
                 <Command>
-                  <CommandInput placeholder="Search framework..." />
+                  <CommandInput placeholder="Search profession..." />
                   <CommandList>
                     <CommandEmpty>No framework found.</CommandEmpty>
                     <CommandGroup>

@@ -1,4 +1,4 @@
-import { CreditCard, DollarSign, Landmark } from 'lucide-react'
+import { CreditCard, Divide, DollarSign, Landmark, Scale } from 'lucide-react'
 import { Button } from './ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card'
 import { Separator } from './ui/separator'
@@ -26,30 +26,58 @@ const BalanceCard = () => {
 
   const cashFlow = (selected?.salary || 0) + passiveIncome - totalExpenses
 
+  const cashFlowDayIncome = (selected?.cashFlowDayIncome || 0) + (selected?.fastTrack?.reduce((acc, i) => acc + i.cashFlow, 0) || 0)
+
   return (
     <>
       <Card className="sm:col-span-2 relative">
-        <div className="absolute top-2 right-2 flex gap-2">
+        {selected?.isOutOfRatRace ? (
+          <div className="absolute top-2 right-2 flex gap-2">
+            <Tooltip content='Divorce'>
+              <Button variant='ghost' onClick={() => dispatch(updateBalance({ amount: (selected?.balance || 0) * -1 }))} className='w-8 h-8 p-0 text-muted-foreground'>
+                <Scale className='w-4 h-4' />
+              </Button>
+            </Tooltip>
 
-          <Tooltip content='Loan'>
-            <Button variant='ghost' disabled={!selected} onClick={() => setOpenLoanDialog(true)} className='w-8 h-8 p-0 text-muted-foreground'>
-              <Landmark className='w-4 h-4' />
-            </Button>
-          </Tooltip>
+            <Tooltip content='Tax Audit / Lawsuit'>
+              <Button variant='ghost' onClick={() => dispatch(updateBalance({ amount: (selected?.balance || 0) * -0.5 }))} className='w-8 h-8 p-0 text-muted-foreground'>
+                <Divide className='w-4 h-4' />
+              </Button>
+            </Tooltip>
 
-          <Tooltip content='Pay Day'>
-            <Button variant='ghost' disabled={!selected} onClick={() => dispatch(updateBalance({ payDay: true, amount: cashFlow }))} className='w-8 h-8 p-0 text-muted-foreground'>
-              <DollarSign className='w-4 h-4' />
-            </Button>
-          </Tooltip>
+            <Tooltip content='Pay Day'>
+              <Button variant='ghost' onClick={() => dispatch(updateBalance({ amount: cashFlowDayIncome }))} className='w-8 h-8 p-0 text-muted-foreground'>
+                <DollarSign className='w-4 h-4' />
+              </Button>
+            </Tooltip>
 
-          <Tooltip content='Update Balance'>
-            <Button variant='ghost' disabled={!selected} onClick={() => setOpenSpendDialog(true)} className='w-8 h-8 p-0 text-muted-foreground'>
-              <CreditCard className='w-4 h-4' />
-            </Button>
-          </Tooltip>
+            <Tooltip content='Update Balance'>
+              <Button variant='ghost' onClick={() => setOpenSpendDialog(true)} className='w-8 h-8 p-0 text-muted-foreground'>
+                <CreditCard className='w-4 h-4' />
+              </Button>
+            </Tooltip>
+          </div>
+        ) : (
+          <div className="absolute top-2 right-2 flex gap-2">
+            <Tooltip content='Loan'>
+              <Button variant='ghost' disabled={!selected} onClick={() => setOpenLoanDialog(true)} className='w-8 h-8 p-0 text-muted-foreground'>
+                <Landmark className='w-4 h-4' />
+              </Button>
+            </Tooltip>
 
-        </div>
+            <Tooltip content='Pay Day'>
+              <Button variant='ghost' disabled={!selected} onClick={() => dispatch(updateBalance({ payDay: true, amount: cashFlow }))} className='w-8 h-8 p-0 text-muted-foreground'>
+                <DollarSign className='w-4 h-4' />
+              </Button>
+            </Tooltip>
+
+            <Tooltip content='Update Balance'>
+              <Button variant='ghost' disabled={!selected} onClick={() => setOpenSpendDialog(true)} className='w-8 h-8 p-0 text-muted-foreground'>
+                <CreditCard className='w-4 h-4' />
+              </Button>
+            </Tooltip>
+          </div>
+        )}
         <CardHeader>
           <CardDescription>Balance</CardDescription>
           <CardTitle className="text-4xl flex items-center">
@@ -65,47 +93,58 @@ const BalanceCard = () => {
         </CardHeader>
         <Separator />
         <CardContent className='flex items-center justify-around py-3 h-[60px]'>
-          <div className="grid place-items-center">
-            <div className="text-sm font-semibold flex items-center">
-              $<span>
-                <AnimatedCounter
-                  value={selected?.salary || 0}
-                  fontSize='14px'
-                  includeDecimals={false}
-                  includeCommas={true}
-                />
-              </span>
+          {selected?.isOutOfRatRace ? (
+            <div className="grid place-items-center">
+              <div className="text-sm font-semibold flex items-center">
+                ${cashFlowDayIncome.toLocaleString()}
+              </div>
+              <div className="text-xs text-muted-foreground">CASHFLOW Day Income</div>
             </div>
-            <div className="text-xs text-muted-foreground">Salary</div>
-          </div>
-          <Separator orientation='vertical' />
-          <div className="grid place-items-center">
-            <div className="text-sm font-semibold flex items-center">
-              $<span>
-                <AnimatedCounter
-                  value={(selected?.salary || 0) + passiveIncome}
-                  fontSize='14px'
-                  includeDecimals={false}
-                  includeCommas={true}
-                />
-              </span>
-            </div>
-            <div className="text-xs text-muted-foreground">Total Income</div>
-          </div>
-          <Separator orientation='vertical' />
-          <div className="grid place-items-center">
-            <div className="text-sm font-semibold flex items-center">
-              $<span>
-                <AnimatedCounter
-                  value={cashFlow}
-                  fontSize='14px'
-                  includeDecimals={false}
-                  includeCommas={true}
-                />
-              </span>
-            </div>
-            <div className="text-xs text-muted-foreground">Cash Flow</div>
-          </div>
+          ) : (
+            <>
+              <div className="grid place-items-center">
+                <div className="text-sm font-semibold flex items-center">
+                  $<span>
+                    <AnimatedCounter
+                      value={selected?.salary || 0}
+                      fontSize='14px'
+                      includeDecimals={false}
+                      includeCommas={true}
+                    />
+                  </span>
+                </div>
+                <div className="text-xs text-muted-foreground">Salary</div>
+              </div>
+              <Separator orientation='vertical' />
+              <div className="grid place-items-center">
+                <div className="text-sm font-semibold flex items-center">
+                  $<span>
+                    <AnimatedCounter
+                      value={(selected?.salary || 0) + passiveIncome}
+                      fontSize='14px'
+                      includeDecimals={false}
+                      includeCommas={true}
+                    />
+                  </span>
+                </div>
+                <div className="text-xs text-muted-foreground">Total Income</div>
+              </div>
+              <Separator orientation='vertical' />
+              <div className="grid place-items-center">
+                <div className="text-sm font-semibold flex items-center">
+                  $<span>
+                    <AnimatedCounter
+                      value={cashFlow}
+                      fontSize='14px'
+                      includeDecimals={false}
+                      includeCommas={true}
+                    />
+                  </span>
+                </div>
+                <div className="text-xs text-muted-foreground">Cash Flow</div>
+              </div>
+            </>
+          )}
         </CardContent>
       </Card>
 

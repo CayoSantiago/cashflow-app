@@ -9,7 +9,9 @@ import InvestmentsCard from './InvestmentsCard'
 import RealEstateCard from './RealEstateCard'
 import Direct2YouButton from './Direct2YouButton'
 import GoldCoinButton from './GoldCoinButton'
-import IncomeCard from './IncomrCard'
+import IncomeCard from './IncomeCard'
+import AddFastTrackInvestmentButton from './AddFastTrackInvestmentButton'
+import FastTrackCharityButton from './FastTrackCharityButton'
 
 const PlayerAssetTabs = () => {
 
@@ -22,17 +24,26 @@ const PlayerAssetTabs = () => {
   const [selectedRealEstate, setSelectedRealEstate] = useState(null)
 
   return (
-    <Tabs defaultValue="assets">
+    <Tabs defaultValue="assets" {...(selected?.isOutOfRatRace ? { value: 'income' } : {})}>
       <div className="flex items-center">
         <TabsList>
           <TabsTrigger disabled={!selected} value='income'>Income</TabsTrigger>
-          <TabsTrigger disabled={!selected} value="assets">Assets</TabsTrigger>
-          <TabsTrigger disabled={!selected} value="liabilities">Liabilities</TabsTrigger>
+          <TabsTrigger disabled={!selected || selected?.isOutOfRatRace} value="assets">Assets</TabsTrigger>
+          <TabsTrigger disabled={!selected || selected?.isOutOfRatRace} value="liabilities">Liabilities</TabsTrigger>
         </TabsList>
         <div className="ml-auto flex items-center gap-2">
-          <Direct2YouButton />
-          <GoldCoinButton />
-          <AddAssetButton />
+          {selected?.isOutOfRatRace ? (
+            <>
+              <FastTrackCharityButton />
+              <AddFastTrackInvestmentButton />
+            </>
+          ) : (
+            <>
+              <Direct2YouButton />
+              <GoldCoinButton />
+              <AddAssetButton />
+            </>
+          )}
         </div>
       </div>
 

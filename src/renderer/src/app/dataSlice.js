@@ -30,11 +30,19 @@ export const dataSlice = createSlice({
         liabilities: profession.liabilities,
         costPerChild: profession.costPerChild,
         loan: 0,
+        loanHistory: [0],
         children: 0,
         coins: 0,
         investments: [],
         realEstate: [],
         isBankrupt: false,
+        isOutOfRatRace: false,
+        fastTrack: [],
+        fastTrackHasDonated: false,
+        cashFlowDayIncome: 0,
+        ratRaceSnapshot: {
+          balance: 0,
+        },
         d2y: {
           hasJoined: false,
           cashFlow: 0,
@@ -200,6 +208,7 @@ export const dataSlice = createSlice({
 
       player.balance += action.payload
       player.loan += action.payload
+      player.loanHistory.push(player.loan)
     },
 
     payOffBankLoan: (state, action) => {
@@ -210,6 +219,7 @@ export const dataSlice = createSlice({
 
       player.balance -= amount
       player.loan -= amount
+      player.loanHistory.push(player.loan)
     },
 
     joinD2Y: (state, action) => {
@@ -227,6 +237,42 @@ export const dataSlice = createSlice({
       if (!player) return
 
       player.d2y.cashFlow += action.payload
+    },
+
+    leaveRatRace: (state) => {
+      const player = state.players[state.selected]
+      if (!player) return
+
+      player.isOutOfRatRace = true
+      player.ratRaceSnapshot.balance = player.balance
+
+      const invCf = player.investments.reduce((acc, i) => acc + i.amount * i.cashFlow, 0)
+      const reCf = player.realEstate.reduce((acc, re) => acc + re.cashFlow, 0)
+      const passiveIncome = invCf + reCf + player.d2y.cashFlow
+
+      player.cashFlowDayIncome = Math.round(passiveIncome / 1000) * 1000 * 100
+      player.balance = player.cashFlowDayIncome
+    },
+
+    addFastTrackInvestment: (state, action) => {
+      const player = state.players[state.selected]
+      if (!player) return
+
+      if (player.fastTrack.find(i => i.title === action.payload.title)) return
+      if (player.balance < action.payload.cost) return
+
+      player.balance -= action.payload.cost
+      player.fastTrack.push(action.payload)
+    },
+
+    fastTrackDonate: (state) => {
+      const player = state.players[state.selected]
+      if (!player) return
+
+      if (player.balance < 100000) return
+
+      player.balance -= 100000
+      player.fastTrackHasDonated = true
     },
 
   }
@@ -254,6 +300,9 @@ export const {
   payOffBankLoan,
   joinD2Y,
   increaseD2YCashFlow,
+  leaveRatRace,
+  addFastTrackInvestment,
+  fastTrackDonate,
 } = dataSlice.actions
 
 export default dataSlice.reducer

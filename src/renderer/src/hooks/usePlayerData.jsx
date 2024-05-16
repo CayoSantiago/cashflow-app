@@ -19,11 +19,13 @@ const usePlayerData = () => {
     + (player?.expenses?.other || 0)
     + (player?.loan || 0) / 10
     + (player?.children || 0) * (player?.costPerChild || 0)
+  
+  const passiveIncome = invIncome + reIncome + player?.d2y?.cashFlow || 0
 
   return {
     players,
     selected: player,
-    passiveIncome: invIncome + reIncome + player?.d2y?.cashFlow || 0,
+    passiveIncome,
     totalExpenses
   }
 

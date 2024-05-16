@@ -9,10 +9,23 @@ import { Button } from './components/ui/button'
 import { RotateCcw, Settings } from 'lucide-react'
 import { useDispatch } from 'react-redux'
 import { reset } from './app/dataSlice'
+import usePlayerData from './hooks/usePlayerData'
+import { useEffect, useState } from 'react'
+import RatRaceDialog from './components/RatRaceDialog'
+import RatRaceStatsCard from './components/RatRaceStatsCard'
 
 const App = () => {
 
+  const { selected, passiveIncome, totalExpenses } = usePlayerData()
+  const [openRatRaceDialog, setOpenRatRaceDialog] = useState(false)
+  
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (passiveIncome > totalExpenses && selected?.isOutOfRatRace === false) {
+      setOpenRatRaceDialog(true)
+    }
+  }, [passiveIncome, totalExpenses, selected?.isOutOfRatRace, selected?.name])
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
@@ -38,13 +51,15 @@ const App = () => {
             <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
               <BalanceCard />
               <PassiveIncomeCard />
-              <ChildrenCard />
+              {selected?.isOutOfRatRace ? null : <ChildrenCard />}
             </div>
             <PlayerAssetTabs />
           </div>
-          <ExpensesCard />
+          {selected?.isOutOfRatRace ? <RatRaceStatsCard /> : <ExpensesCard />}
         </main>
       </div>
+
+      <RatRaceDialog open={openRatRaceDialog} onOpenChange={setOpenRatRaceDialog} />
     </div>
   )
 }

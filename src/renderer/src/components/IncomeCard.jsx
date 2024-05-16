@@ -1,7 +1,8 @@
+import { cn } from '../lib/utils'
 import { Card, CardContent } from './ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table'
 
-const IncomeCard = ({ name, salary = 0, investments = [], realEstate = [], d2y = 0 }) => {
+const IncomeCard = ({ name, salary = 0, investments = [], realEstate = [], d2y = 0, isOutOfRatRace = false, fastTrack = [] }) => {
 
   const invItems = investments.filter(i => i.cashFlow > 0).map(i => ({ ...i, cashFlow: i.amount * i.cashFlow }))
   const incomeItems = [
@@ -10,6 +11,8 @@ const IncomeCard = ({ name, salary = 0, investments = [], realEstate = [], d2y =
     ...invItems,
     ...realEstate,
   ]
+
+  const fastTrackTotal = fastTrack?.reduce((acc, i) => acc + i.cashFlow, 0) || 0
   
   return (
     <Card className='mb-2'>
@@ -22,7 +25,23 @@ const IncomeCard = ({ name, salary = 0, investments = [], realEstate = [], d2y =
             </TableRow>
           </TableHeader>
           <TableBody>
-            {incomeItems?.map((i, idx) => (
+            {isOutOfRatRace ? (
+              <>
+                {fastTrack?.map((i, idx) => (
+                  <TableRow key={`${name}-${i.title}-${idx}`}>
+                    <TableCell className={cn('grid', i.sub ? '' : 'py-6')}>
+                      <span>{i.title}</span>
+                      <span className='text-xs'>{i.sub || ''}</span>
+                    </TableCell>
+                    <TableCell className='text-right'>${i.cashFlow.toLocaleString()}</TableCell>
+                  </TableRow>
+                ))}
+                <TableRow className='font-semibold'>
+                  <TableCell>Total</TableCell>
+                  <TableCell className='text-right'>${fastTrackTotal.toLocaleString()}</TableCell>
+                </TableRow>
+              </>
+            ) : incomeItems?.map((i, idx) => (
               <TableRow key={`${name}-${i.name}-${idx}`}>
                 <TableCell>{i.name}</TableCell>
                 <TableCell className="text-right">${i.cashFlow.toLocaleString()}</TableCell>

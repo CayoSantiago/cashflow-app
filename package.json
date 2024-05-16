@@ -9,15 +9,11 @@
     "dev": "electron-vite dev -w --outDir=dist",
     "build": "electron-vite build --outDir=dist",
     "preview": "electron-vite preview --outDir=dist",
-    
     "start": "electron-forge start",
-    
     "package": "electron-forge package",
     "make": "electron-forge make",
-    
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
   },
   "postinstall": "electron-builder install-app-deps",
@@ -43,8 +39,10 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
+    "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-checkbox": "^1.0.4",
+    "@radix-ui/react-collapsible": "^1.0.3",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-label": "^2.0.2",
