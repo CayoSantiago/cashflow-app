@@ -53,7 +53,26 @@ export const dataSlice = createSlice({
     },
 
     selectPlayer: (state, action) => {
+      if (action.payload < 0 || action.payload >= state.players.length) return
       Object.assign(state, { selected: action.payload })
+    },
+
+    nextPlayer: (state) => {
+      if (state.selected === -1) return
+
+      let i = state.selected + 1
+      if (i >= state.players.length) i = 0
+
+      state.selected = i
+    },
+
+    prevPlayer: (state) => {
+      if (state.selected === -1) return
+
+      let i = state.selected - 1
+      if (i < 0) i = state.players.length - 1
+
+      state.selected = i
     },
 
     incrementChildren: (state) => {
@@ -282,6 +301,8 @@ export const {
   reset,
   addPlayer,
   selectPlayer,
+  nextPlayer,
+  prevPlayer,
   incrementChildren,
   decrementChildren,
   addInvestment,
