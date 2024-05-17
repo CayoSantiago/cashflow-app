@@ -40,7 +40,7 @@ const ChildrenCard = () => {
         </div>
       </CardContent>
       <CardFooter>
-        <Progress value={Math.min(100, (selected?.children || 0) * 34)} aria-label="33% increase" />
+        <Progress value={Math.min(100, (selected?.children || 0) * 34)} aria-label={`${selected?.children || 0} children`} />
       </CardFooter>
     </Card>
   )

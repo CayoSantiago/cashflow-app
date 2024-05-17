@@ -92,7 +92,7 @@ const BalanceCard = () => {
                 includeCommas={true}
               />
             </span>
-            {selected?.balanceHistory?.length > 1 ? (
+            {(selected?.balanceHistory?.length > 1 && selected?.isOutOfRatRace === false) ? (
               <div className="ml-6 flex-grow self-stretch">
                 <SparkAreaChart
                   data={balanceHistory}
@@ -105,7 +105,9 @@ const BalanceCard = () => {
             ) : null}
           </CardTitle>
         </CardHeader>
+
         <Separator />
+        
         <CardContent className='flex items-center justify-around py-3 h-[60px]'>
           {selected?.isOutOfRatRace ? (
             <div className="grid place-items-center">
