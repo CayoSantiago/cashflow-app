@@ -12,9 +12,9 @@
     },
     "costPerChild": 480,
     "liabilities": [
-      { "key": "home", "name": "Home Mortgage", "value": 143000 },
-      { "key": "car", "name": "Car Loans", "value": 15000 },
-      { "key": "creditCard", "name": "Credit Card Debt", "value": 23000 }
+      { "key": "home", "name": "Home Mortgage", "value": 143000, "color": "bg-cyan-500" },
+      { "key": "car", "name": "Car Loans", "value": 15000, "color": "bg-blue-500" },
+      { "key": "creditCard", "name": "Credit Card Debt", "value": 23000, "color": "bg-indigo-500" }
     ]
   },
   {
@@ -31,10 +31,10 @@
     },
     "costPerChild": 240,
     "liabilities": [
-      { "key": "home", "name": "Home Mortgage", "value": 75000 },
-      { "key": "school", "name": "School Loans", "value": 12000 },
-      { "key": "car", "name": "Car Loans", "value": 6000 },
-      { "key": "creditCard", "name": "Credit Card Debt", "value": 4000 }
+      { "key": "home", "name": "Home Mortgage", "value": 75000, "color": "bg-cyan-500" },
+      { "key": "school", "name": "School Loans", "value": 12000, "color": "bg-violet-500" },
+      { "key": "car", "name": "Car Loans", "value": 6000, "color": "bg-blue-500" },
+      { "key": "creditCard", "name": "Credit Card Debt", "value": 4000, "color": "bg-indigo-500" }
     ]
   },
   {
@@ -51,10 +51,10 @@
     },
     "costPerChild": 640,
     "liabilities": [
-      { "key": "home", "name": "Home Mortgage", "value": 202000 },
-      { "key": "school", "name": "School Loans", "value": 150000 },
-      { "key": "car", "name": "Car Loans", "value": 19000 },
-      { "key": "creditCard", "name": "Credit Card Debt", "value": 10000 }
+      { "key": "home", "name": "Home Mortgage", "value": 202000, "color": "bg-cyan-500" },
+      { "key": "school", "name": "School Loans", "value": 150000, "color": "bg-violet-500" },
+      { "key": "car", "name": "Car Loans", "value": 19000, "color": "bg-blue-500" },
+      { "key": "creditCard", "name": "Credit Card Debt", "value": 10000, "color": "bg-indigo-500" }
     ]
   },
   {
@@ -71,10 +71,10 @@
     },
     "costPerChild": 250,
     "liabilities": [
-      { "key": "home", "name": "Home Mortgage", "value": 75000 },
-      { "key": "school", "name": "School Loans", "value": 12000 },
-      { "key": "car", "name": "Car Loans", "value": 7000 },
-      { "key": "creditCard", "name": "Credit Card Debt", "value": 5000 }
+      { "key": "home", "name": "Home Mortgage", "value": 75000, "color": "bg-cyan-500" },
+      { "key": "school", "name": "School Loans", "value": 12000, "color": "bg-violet-500" },
+      { "key": "car", "name": "Car Loans", "value": 7000, "color": "bg-blue-500" },
+      { "key": "creditCard", "name": "Credit Card Debt", "value": 5000, "color": "bg-indigo-500" }
     ]
   },
   {
@@ -90,9 +90,9 @@
     },
     "costPerChild": 70,
     "liabilities": [
-      { "key": "home", "name": "Home Mortgage", "value": 20000 },
-      { "key": "car", "name": "Car Loans", "value": 4000 },
-      { "key": "creditCard", "name": "Credit Card Debt", "value": 3000 }
+      { "key": "home", "name": "Home Mortgage", "value": 20000, "color": "bg-cyan-500" },
+      { "key": "car", "name": "Car Loans", "value": 4000, "color": "bg-blue-500" },
+      { "key": "creditCard", "name": "Credit Card Debt", "value": 3000, "color": "bg-indigo-500" }
     ]
   },
   {
@@ -109,10 +109,10 @@
     },
     "costPerChild": 380,
     "liabilities": [
-      { "key": "home", "name": "Home Mortgage", "value": 115000 },
-      { "key": "school", "name": "School Loans", "value": 78000 },
-      { "key": "car", "name": "Car Loans", "value": 11000 },
-      { "key": "creditCard", "name": "Credit Card Debt", "value": 7000 }
+      { "key": "home", "name": "Home Mortgage", "value": 115000, "color": "bg-cyan-500" },
+      { "key": "school", "name": "School Loans", "value": 78000, "color": "bg-violet-500" },
+      { "key": "car", "name": "Car Loans", "value": 11000, "color": "bg-blue-500" },
+      { "key": "creditCard", "name": "Credit Card Debt", "value": 7000, "color": "bg-indigo-500" }
     ]
   },
   {
@@ -128,9 +128,9 @@
     },
     "costPerChild": 110,
     "liabilities": [
-      { "key": "home", "name": "Home Mortgage", "value": 31000 },
-      { "key": "car", "name": "Car Loans", "value": 3000 },
-      { "key": "creditCard", "name": "Credit Card Debt", "value": 3000 }
+      { "key": "home", "name": "Home Mortgage", "value": 31000, "color": "bg-cyan-500" },
+      { "key": "car", "name": "Car Loans", "value": 3000, "color": "bg-blue-500" },
+      { "key": "creditCard", "name": "Credit Card Debt", "value": 3000, "color": "bg-indigo-500" }
     ]
   },
   {
@@ -147,10 +147,10 @@
     },
     "costPerChild": 170,
     "liabilities": [
-      { "key": "home", "name": "Home Mortgage", "value": 47000 },
-      { "key": "school", "name": "School Loans", "value": 6000 },
-      { "key": "car", "name": "Car Loans", "value": 5000 },
-      { "key": "creditCard", "name": "Credit Card Debt", "value": 4000 }
+      { "key": "home", "name": "Home Mortgage", "value": 47000, "color": "bg-cyan-500" },
+      { "key": "school", "name": "School Loans", "value": 6000, "color": "bg-violet-500" },
+      { "key": "car", "name": "Car Loans", "value": 5000, "color": "bg-blue-500" },
+      { "key": "creditCard", "name": "Credit Card Debt", "value": 4000, "color": "bg-indigo-500" }
     ]
   },
   {
@@ -166,9 +166,9 @@
     },
     "costPerChild": 160,
     "liabilities": [
-      { "key": "home", "name": "Home Mortgage", "value": 46000 },
-      { "key": "car", "name": "Car Loans", "value": 5000 },
-      { "key": "creditCard", "name": "Credit Card Debt", "value": 3000 }
+      { "key": "home", "name": "Home Mortgage", "value": 46000, "color": "bg-cyan-500" },
+      { "key": "car", "name": "Car Loans", "value": 5000, "color": "bg-blue-500" },
+      { "key": "creditCard", "name": "Credit Card Debt", "value": 3000, "color": "bg-indigo-500" }
     ]
   },
   {
@@ -184,9 +184,9 @@
     },
     "costPerChild": 140,
     "liabilities": [
-      { "key": "home", "name": "Home Mortgage", "value": 38000 },
-      { "key": "car", "name": "Car Loans", "value": 4000 },
-      { "key": "creditCard", "name": "Credit Card Debt", "value": 3000 }
+      { "key": "home", "name": "Home Mortgage", "value": 38000, "color": "bg-cyan-500" },
+      { "key": "car", "name": "Car Loans", "value": 4000, "color": "bg-blue-500" },
+      { "key": "creditCard", "name": "Credit Card Debt", "value": 3000, "color": "bg-indigo-500" }
     ]
   },
   {
@@ -203,10 +203,10 @@
     },
     "costPerChild": 180,
     "liabilities": [
-      { "key": "home", "name": "Home Mortgage", "value": 50000 },
-      { "key": "school", "name": "School Loans", "value": 12000 },
-      { "key": "car", "name": "Car Loans", "value": 5000 },
-      { "key": "creditCard", "name": "Credit Card Debt", "value": 4000 }
+      { "key": "home", "name": "Home Mortgage", "value": 50000, "color": "bg-cyan-500" },
+      { "key": "school", "name": "School Loans", "value": 12000, "color": "bg-violet-500" },
+      { "key": "car", "name": "Car Loans", "value": 5000, "color": "bg-blue-500" },
+      { "key": "creditCard", "name": "Credit Card Debt", "value": 4000, "color": "bg-indigo-500" }
     ]
   },
   {
@@ -222,9 +222,9 @@
     },
     "costPerChild": 140,
     "liabilities": [
-      { "key": "home", "name": "Home Mortgage", "value": 38000 },
-      { "key": "car", "name": "Car Loans", "value": 4000 },
-      { "key": "creditCard", "name": "Credit Card Debt", "value": 3000 }
+      { "key": "home", "name": "Home Mortgage", "value": 38000, "color": "bg-cyan-500" },
+      { "key": "car", "name": "Car Loans", "value": 4000, "color": "bg-blue-500" },
+      { "key": "creditCard", "name": "Credit Card Debt", "value": 3000, "color": "bg-indigo-500" }
     ]
   }
 ]

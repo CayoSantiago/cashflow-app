@@ -11,6 +11,7 @@ import { AnimatedCounter } from 'react-animated-counter'
 import Tooltip from './Tooltip'
 import LoanDialog from './LoanDialog'
 import BankruptcyDialog from './BankruptcyDialog'
+import { SparkAreaChart } from '@tremor/react'
 
 const BalanceCard = () => {
 
@@ -27,6 +28,8 @@ const BalanceCard = () => {
   const cashFlow = (selected?.salary || 0) + passiveIncome - totalExpenses
 
   const cashFlowDayIncome = (selected?.cashFlowDayIncome || 0) + (selected?.fastTrack?.reduce((acc, i) => acc + i.cashFlow, 0) || 0)
+
+  const balanceHistory = selected?.balanceHistory?.map((v, idx) => ({ idx, value: v })) || []
 
   return (
     <>
@@ -89,6 +92,17 @@ const BalanceCard = () => {
                 includeCommas={true}
               />
             </span>
+            {selected?.balanceHistory?.length > 1 ? (
+              <div className="ml-6 flex-grow self-stretch">
+                <SparkAreaChart
+                  data={balanceHistory}
+                  categories={['value']}
+                  index='idx'
+                  colors={['emerald']}
+                  className='w-full h-full'
+                />
+              </div>
+            ) : null}
           </CardTitle>
         </CardHeader>
         <Separator />

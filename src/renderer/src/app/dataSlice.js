@@ -26,6 +26,7 @@ export const dataSlice = createSlice({
         profession: profession.title,
         salary: profession.salary,
         balance: profession.savings + cashFlow,
+        balanceHistory: [profession.savings + cashFlow],
         expenses: profession.expenses,
         liabilities: profession.liabilities,
         costPerChild: profession.costPerChild,
@@ -95,6 +96,7 @@ export const dataSlice = createSlice({
       if (totalCost > player.balance) return
 
       player.balance -= totalCost
+      player.balanceHistory.push(player.balance)
       player.investments.push(action.payload)
     },
 
@@ -106,6 +108,7 @@ export const dataSlice = createSlice({
       if (!inv) return
 
       player.balance += inv.amount * action.payload.price
+      player.balanceHistory.push(player.balance)
       player.investments.splice(action.payload.idx, 1)
     },
 
@@ -136,6 +139,7 @@ export const dataSlice = createSlice({
       if (action.payload.downPayment > player.balance) return
       
       player.balance -= action.payload.downPayment
+      player.balanceHistory.push(player.balance)
       player.realEstate.push(action.payload)
     },
 
@@ -147,6 +151,7 @@ export const dataSlice = createSlice({
       if (!realEstate) return
 
       player.balance += action.payload.price - realEstate.mortgage
+      player.balanceHistory.push(player.balance)
       player.realEstate.splice(action.payload.idx, 1)
     },
 
@@ -176,6 +181,7 @@ export const dataSlice = createSlice({
 
       const { payDay = false, amount } = action.payload
       player.balance += amount
+      player.balanceHistory.push(player.balance)
 
       if (player.isBankrupt && player.balance >= 0) {
         player.isBankrupt = false
@@ -192,6 +198,7 @@ export const dataSlice = createSlice({
       if (price * amount > player.balance) return
 
       player.balance -= price * amount
+      player.balanceHistory.push(player.balance)
       player.coins += amount
     },
 
@@ -203,6 +210,7 @@ export const dataSlice = createSlice({
       if (player.coins < amount) return
 
       player.balance += price * amount
+      player.balanceHistory.push(player.balance)
       player.coins -= amount
     },
 
@@ -218,6 +226,7 @@ export const dataSlice = createSlice({
       if (player.balance < lib.value) return
 
       player.balance -= lib.value
+      player.balanceHistory.push(player.balance)
       player.liabilities.splice(action.payload, 1)
     },
 
@@ -226,6 +235,7 @@ export const dataSlice = createSlice({
       if (!player) return
 
       player.balance += action.payload
+      player.balanceHistory.push(player.balance)
       player.loan += action.payload
       player.loanHistory.push(player.loan)
     },
@@ -237,6 +247,7 @@ export const dataSlice = createSlice({
       const amount = Math.min(action.payload, player.loan)
 
       player.balance -= amount
+      player.balanceHistory.push(player.balance)
       player.loan -= amount
       player.loanHistory.push(player.loan)
     },
@@ -248,6 +259,7 @@ export const dataSlice = createSlice({
       if (player.d2y.hasJoined || action.payload > player.balance) return
 
       player.balance -= action.payload
+      player.balanceHistory.push(player.balance)
       player.d2y.hasJoined = true
     },
 
