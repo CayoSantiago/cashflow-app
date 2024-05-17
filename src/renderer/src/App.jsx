@@ -4,7 +4,7 @@ import BalanceCard from './components/BalanceCard'
 import PassiveIncomeCard from './components/PassiveIncomeCard'
 import ChildrenCard from './components/ChildrenCard'
 import PlayerAssetTabs from './components/PlayerAssetTabs'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuShortcut, DropdownMenuTrigger } from './components/ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './components/ui/dropdown-menu'
 import { Button } from './components/ui/button'
 import { RotateCcw, Settings } from 'lucide-react'
 import { useDispatch } from 'react-redux'
@@ -38,11 +38,10 @@ const App = () => {
                 <Settings className='w-5 h-5' />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align='end' className='w-[200px]'>
+            <DropdownMenuContent align='end'>
               <DropdownMenuItem onSelect={() => dispatch(reset())}>
                 <RotateCcw className='w-4 h-4 mr-2' />
                 <span>New Game</span>
-                <DropdownMenuShortcut>⇧⌘N</DropdownMenuShortcut>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

@@ -26,7 +26,7 @@ export const dataSlice = createSlice({
         profession: profession.title,
         salary: profession.salary,
         balance: profession.savings + cashFlow,
-        balanceHistory: [profession.savings + cashFlow],
+        balanceHistory: [profession.savings, profession.savings + cashFlow],
         expenses: profession.expenses,
         liabilities: profession.liabilities,
         costPerChild: profession.costPerChild,

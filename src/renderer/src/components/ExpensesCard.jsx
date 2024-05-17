@@ -4,8 +4,9 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 import { Separator } from './ui/separator'
 import usePlayerData from '@/hooks/usePlayerData'
 import { useState } from 'react'
-import { DonutChart, List, ListItem } from '@tremor/react'
+import { DonutChart } from '@tremor/react'
 import { cn } from '../lib/utils'
+import Tooltip from './Tooltip'
 
 const currencyFormatter = (number) => {
   return '$' + Intl.NumberFormat('us').format(number).toString();
@@ -13,7 +14,7 @@ const currencyFormatter = (number) => {
 
 const ExpensesCard = () => {
   
-  const { selected, totalExpenses } = usePlayerData()
+  const { selected } = usePlayerData()
 
   const [showGraph, setShowGraph] = useState(false)
 
@@ -40,14 +41,17 @@ const ExpensesCard = () => {
       <CardHeader className="bg-muted/50">
         <div className="flex items-center justify-between">
           <CardTitle>Expenses</CardTitle>
-          <Button variant='ghost' disabled={!selected} onClick={() => setShowGraph(prev => !prev)} className='w-8 h-8 p-0'>
-            {showGraph ? <Menu className='w-4 h-4' /> : <PieChart className='w-4 h-4' />}
-          </Button>
+          <Tooltip content={showGraph ? 'List View' : 'Graph View'}>
+            <Button variant='ghost' disabled={!selected} onClick={() => setShowGraph(prev => !prev)} className='w-8 h-8 p-0'>
+              {showGraph ? <Menu className='w-4 h-4' /> : <PieChart className='w-4 h-4' />}
+            </Button>
+          </Tooltip>
         </div>
       </CardHeader>
       {showGraph ? (
         <CardContent className='p-6 text-sm'>
           <DonutChart
+            className='mt-2'
             data={expenses}
             valueFormatter={currencyFormatter}
             category='value'
@@ -57,28 +61,23 @@ const ExpensesCard = () => {
           />
           <p className="mt-8 flex items-center justify-between text-tremor-label text-tremor-content dark:text-dark-tremor-content">
             <span>Category</span>
-            <span>Amount / Share</span>
+            <span>Amount</span>
           </p>
-          <List className='mt-2'>
+          <ul className='w-full divide-y divide-border text-muted-foreground mt-2'>
             {expenses.map(({ name, color, value }) => (
-              <ListItem key={name} className='space-x-6'>
+              <li key={name} className='w-full flex justify-between items-center py-2 space-x-6'>
                 <div className="flex items-center space-x-2.5 truncate">
-                  <span className={cn(color, 'h-2.5 w-2.5 shrink-0 rounded-sm')} aria-hidden={true} />
+                  <span className={cn(color, 'h-8 w-0.5 shrink-0')} aria-hidden={true} />
                   <span className="truncate dark:text-dark-tremor-content-emphasis">
                     {name}
                   </span>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <span className="font-medium tabular-nums text-tremor-content-strong dark:text-dark-tremor-content-strong">
-                    {currencyFormatter(value)}
-                  </span>
-                  <span className="rounded-tremor-small bg-tremor-background-subtle px-1.5 py-0.5 text-tremor-label font-medium tabular-nums text-tremor-content-emphasis dark:bg-dark-tremor-background-subtle dark:text-dark-tremor-content-emphasis">
-                    {Math.round(value / totalExpenses * 1000) / 10}%
-                  </span>
-                </div>
-              </ListItem>
+                <span className="font-medium tabular-nums text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                  {currencyFormatter(value)}
+                </span>
+              </li>
             ))}
-          </List>
+          </ul>
         </CardContent>
       ) : (
         <CardContent className="p-6 text-sm">
